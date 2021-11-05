@@ -34,5 +34,6 @@ build/
 
 .mvn/
 mvnw
+mvnw.cmd
 
 application.yml
