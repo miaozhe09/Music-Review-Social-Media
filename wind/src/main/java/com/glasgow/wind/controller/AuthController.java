@@ -3,21 +3,22 @@ package com.glasgow.wind.controller;
 
 import com.glasgow.wind.domain.User;
 import com.glasgow.wind.service.UserService;
+import com.glasgow.wind.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     UserService userService;
+
+
 
     @PostMapping("/register")
     public Object register(@RequestBody Map<String,String> map){
@@ -32,13 +33,10 @@ public class AuthController {
 
         userService.add(user);
 
-        return "register success";
+        return ResponseUtil.ok();
     }
 
 
-    @PostMapping("login")
-    public Object login(@RequestBody String body) {
-        return "";
-    }
+
 
 }

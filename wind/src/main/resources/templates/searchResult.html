@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Artist</th>
+            <th>Type</th>
+        </tr>
+        <tr th:each="album : ${albumList}">
+            <td th:text="${album.name}">Name</td>
+            <td th:text="${album.artist}">Artist</td>
+            <td th:text="${album.type}">Type</td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+</body>
+</html>

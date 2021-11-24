@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+</head>
+<body>
+    Add An Album
+    <form class="layui-form" id="form-addAlbum">
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Release name:</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" class="layui-input" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Artist:</label>
+            <div class="layui-input-block">
+                <input type="text" name="artist" class="layui-input" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Type:</label>
+            <div class="layui-input-block">
+                <input type="text" name="type" class="layui-input" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Release date:</label>
+            <div class="layui-input-block">
+                <input type="text" name="releaseDate" class="layui-input" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Introduction:</label>
+            <div class="layui-input-block">
+                <textarea name="introduction"  placeholder="请输入介绍" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Track Listing:</label>
+            <div class="layui-input-block">
+                <textarea name="trackListing"  placeholder="请输入Track Listing" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <input type="hidden" name="coverUrl" class="image">
+        <div class="layui-form-item">
+            <label class="layui-form-label ">Cover for the album:</label>
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo1">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="button-addAlbum">提交</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: '/storage/create'
+                ,accept:'images'
+                ,size:50000
+                ,before: function(obj){
+
+                    obj.preview(function(index, file, result){
+
+                        $('#demo1').attr('src', result);
+                    });
+                }
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code != 0){
+                        return layer.msg('上传失败');
+                    }
+                    //上传成功
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #4cae4c;">上传成功</span>');
+
+                    var fileupload = $(".image");
+                    fileupload.attr("value",res.data.src);
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+        });
+
+        $("#button-addAlbum").click(function() {
+            var fields = $('#form-addAlbum').serializeArray();
+            var obj = {};
+            $.each(fields, function(index, field) {
+                obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+            })
+            $.ajax({
+                url: "/album/create",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),//将对象转为json字符串
+                success: function(res) {
+                    if (res.code == 0) {
+                        location.href = "/addAlbumSuccessfully";
+                    } else {
+                        alert("注册失败！" + res.message);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

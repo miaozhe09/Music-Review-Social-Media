@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+    <form class="layui-form" th:action="@{/search/all}" th:method="get">
+        <div class="layui-form-item">
+            <label class="layui-form-label">Search</label>
+            <div class="layui-input-block">
+                <input type="text" name="keyword" placeholder="Album or Artist" autocomplete="off" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" >Search</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

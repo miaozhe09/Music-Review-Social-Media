@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="layui/css/layui.css">
+
+  <style>
+    .fl {
+    float: left;
+    }
+
+    .fr {
+    float: right;
+    }
+
+    .di{
+      display: inline;
+    }
+
+    .navP{
+      padding-left: 10%;
+      padding-right: 15%;
+      margin-bottom: 30px;
+    }
+
+    .carouselM{
+      margin-left: 12.5%;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      margin-left: 12.5%;
+      margin-right:17.5%;
+    }
+
+    .box-hd {
+      height: 45px;
+    }
+    .box-hd h3 {
+      float: left;
+      font-size: large;
+      color: black;
+    }
+    .box-hd a {
+      float: right;
+      font-size: large;
+      color: gray;
+    }
+    /* 把li 的父亲ul 修改的足够宽一行能装开5个盒子就不会换行了 */
+    .box-bd ul {
+      width: 100%;
+    }
+    .box-bd ul li {
+      float: left;
+      width: 23.5%;
+      height: 270px;
+      background-color: #fff;
+      margin-right: 2%;
+      margin-bottom: 35px;
+    }
+    .box-bd ul li img {
+      width: 100%;
+    }
+    .box-bd ul li h4 {
+      margin: 15px 20px 10px 25px;
+      font-size: 16px;
+      color: black;
+      font-weight: 400;
+    }
+    .box-bd .info {
+      margin: 0 20px 0 25px;
+      font-size: 14px;
+      color: gray;
+    }
+
+    .clearFix:before,.clearFix:after {
+      content:"";
+      display:table;
+    }
+    .clearFix:after {
+      clear:both;
+    }
+    .clearFix {
+      *zoom:1;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div>
+    <ul class="layui-nav layui-bg-black navP" lay-filter="">
+      <li class="layui-nav-item"><a href="">Home</a></li>
+      <li class="layui-nav-item layui-this"><a href="">New Releases</a></li>
+      <li class="layui-nav-item"><a href="">Discover</a></li>
+      <li class="layui-nav-item"><a href="">Charts</a></li>
+      <li class="layui-nav-item"><a href="">Reviews</a></li>
+
+      <li class="layui-nav-item fr">
+        <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">Username</a>
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+          <dd><a href="">Profile</a></dd>
+          <dd><a href="">Your Reviews</a></dd>
+          <dd><a href="">Log out</a></dd>
+        </dl>
+      </li>
+
+      <li class="layui-nav-item fr"><a href="">Search</a></li>
+    </ul>
+  </div>
+
+  <div class="layui-carousel carouselM" id="test1">
+    <div carousel-item >
+      <div>
+        <a href=""><img src="images/c1.jpg" style="width: 47%; "></a>
+        <a href=""><img src="images/c2.jpg" style="width: 47%;" class="fr"></a>
+      </div>
+
+      <div>
+        <a href=""><img src="images/c3.jpg" style="width: 47%;"></a>
+        <a href=""><img src="images/c4.jpg" style="width: 47%;" class="fr"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. box核心内容区域开始 -->
+  <div class="box">
+    <div class="box-hd">
+      <h3>New Releases</h3>
+      <a href="#">More</a>
+    </div>
+
+    <div class="box-bd">
+      <ul class="clearFix">
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+
+        </li>
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li style="margin-right: 0">
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li>
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+        <li style="margin-right: 0">
+          <img src="images/n1.jpg" alt="">
+          <h4>
+            Abbey Road
+          </h4>
+          <div class="info">
+            The Beatles
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <!-- 4. box核心内容区域结束 -->
+
+  <div id="test2" >
+  </div>
+  TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="layui/layui.js"></script>
+
+  <script>
+    layui.use('carousel', function(){
+      var carousel = layui.carousel;
+      //建造实例
+      carousel.render({
+        elem: '#test1'
+        ,width: '70%' //设置容器宽度
+        ,height:'450px'
+        ,arrow: 'always' //始终显示箭头
+        ,autoplay: false
+      });
+    });
+
+    layui.use('rate', function(){
+      var rate = layui.rate;
+
+      //渲染
+      var ins1 = rate.render({
+        elem: '#test2'  //绑定元素
+        ,readonly: true
+        ,half: true
+        ,value: 4.5
+      });
+    });
+  </script>
+
+</body>
+</html>
