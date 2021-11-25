@@ -25,7 +25,7 @@ public class AlbumService {
         albumMapper.insertSelective(album);
     }
 
-    public List<Album> querySelective(String name){
+    public List<Album> queryByKeyword(String name){
         AlbumExample example = new AlbumExample();
         AlbumExample.Criteria criteria = example.createCriteria();
 

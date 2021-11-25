@@ -34,9 +34,16 @@ public class ResponseUtil {
         return obj;
     }
 
-    public static Object fail(int code, String msg) {
+    public static Object fail(String msg) {
         Map<String, Object> obj = new HashMap<String, Object>();
         obj.put("code", -1);
+        obj.put("msg", msg);
+        return obj;
+    }
+
+    public static Object fail(int code, String msg) {
+        Map<String, Object> obj = new HashMap<String, Object>();
+        obj.put("code", code);
         obj.put("msg", msg);
         return obj;
     }

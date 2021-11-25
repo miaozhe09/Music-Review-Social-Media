@@ -29,7 +29,7 @@ public class SearchController {
     @GetMapping("/all")
     public String searchResult(@RequestParam("keyword")String keyword, Model model){
 
-        List<Album> albums = albumService.querySelective(keyword);
+        List<Album> albums = albumService.queryByKeyword(keyword);
         model.addAttribute("albumList", albums);
 
 

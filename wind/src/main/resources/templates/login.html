@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+
+    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        h1 {
+            margin: 0 auto;
+            width:200px;
+            font-size: 50px;
+        }
+
+        .center-block {
+            margin: 0 auto;
+            width:320px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <h1>Log in</h1>
+    </div>
+    <br><br>
+
+    <div class="layui-form center-block">
+        <form id="form-login" class="layui-form" action="">
+            <div class="layui-form-item">
+                <input type="text" id="username" name="username" lay-verify="account" placeholder="Username"
+                       autocomplete="off" class="layui-input">
+            </div>
+
+            <div class="layui-form-item">
+                <input type="password" id="password" name="password" lay-verify="password" placeholder="Password"
+                       autocomplete="off" class="layui-input" >
+            </div>
+
+            <div class="layui-form-item">
+                <button id="btn-login" class="layui-btn layui-btn-fluid" lay-submit=""
+                        lay-filter="login">Submit
+                </button>
+            </div>
+        </form>
+    </div>
+1
+    <script th:inline="javascript">
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+
+            form.on('submit(login)', function () {
+                var username=$("#username").val();
+                var password=$("#password").val();
+                if (username == '') {
+                    layer.msg('Username can not be empty!');
+                    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                }
+                if (password == '') {
+                    layer.msg('Password can not be empty!');
+                    return false;
+                }
+
+                var fields = $('#form-login').serializeArray();
+                var obj = {};
+                $.each(fields, function(index, field) {
+                    obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+                })
+                $.ajax({
+                    url: "/auth/login",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),//将对象转为json字符串
+                    success: function(res) {
+                        if (res.code == 0) {
+                            layer.msg('Login Success', {icon: 6,time:1000}, function () {
+                                window.location = '/index';
+                            });
+                        } else {
+                            console.log(res.msg);
+                            layer.msg(res.msg, {icon: 5,time:3000});
+                        }
+                    },
+                    error: function(){
+                        layer.msg('Login Fail', {icon: 5,time:3000});
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

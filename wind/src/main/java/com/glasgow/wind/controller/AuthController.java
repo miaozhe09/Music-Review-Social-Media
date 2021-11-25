@@ -9,16 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     UserService userService;
-
-
 
     @PostMapping("/register")
     public Object register(@RequestBody Map<String,String> map){
@@ -33,6 +34,24 @@ public class AuthController {
 
         userService.add(user);
 
+        return ResponseUtil.ok();
+    }
+
+    @PostMapping("/login")
+    public Object login(@RequestBody Map<String,String> map, HttpSession session){
+        // System.out.println(map);
+        String username = map.get("username");
+        String password = map.get("password");
+
+        List<User> users = userService.queryByUsername(username);
+        if (users.size() != 1){
+            return ResponseUtil.fail("There is something wrong with the username!");
+        }
+        if(!users.get(0).getPassword().equals(password)){
+            return ResponseUtil.fail("The password is incorrect!");
+        }
+
+        session.setAttribute("username", username);
         return ResponseUtil.ok();
     }
 
