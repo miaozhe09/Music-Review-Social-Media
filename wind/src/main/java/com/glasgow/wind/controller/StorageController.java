@@ -38,4 +38,6 @@ public class StorageController {
         data.put("src", storagePath + "/" + uuid);
         return ResponseUtil.ok(data);
     }
+
+
 }

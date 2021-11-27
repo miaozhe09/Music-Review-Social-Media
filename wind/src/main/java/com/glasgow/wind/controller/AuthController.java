@@ -53,6 +53,7 @@ public class AuthController {
         }
 
         session.setAttribute("username", username);
+        session.setAttribute("avatar","c1.jpg");
         return ResponseUtil.ok();
     }
 

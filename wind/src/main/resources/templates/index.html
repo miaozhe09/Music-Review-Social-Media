@@ -103,9 +103,9 @@
       <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
 
       <li class="layui-nav-item fr" th:if="${session.username} != null">
-        <a th:href="@{/}"><img th:src="@{//t.cn/RCzsdCq}" class="layui-nav-img" th:text="${session.username}"></a>
+        <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{images/{avatar}(avatar=${session.avatar})}" class="layui-nav-img" th:text="${session.username}"></a>
         <dl class="layui-nav-child"> <!-- 二级菜单 -->
-          <dd><a th:href="@{/}">Profile</a></dd>
+          <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
           <dd><a th:href="@{/}">Your Reviews</a></dd>
           <dd><a th:href="@{/}">Log out</a></dd>
         </dl>

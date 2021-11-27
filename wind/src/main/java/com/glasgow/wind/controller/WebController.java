@@ -31,4 +31,9 @@ public class WebController {
         return "addAlbumSuccessfully";
     }
 
+    @RequestMapping("/profile/{username}")
+    public String profile(){
+        return "profile";
+    }
+
 }
