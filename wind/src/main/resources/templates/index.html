@@ -6,6 +6,9 @@
   <title>Home</title>
   <link rel="stylesheet" th:href="@{layui/css/layui.css}">
 
+  <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+  <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
   <style>
     .fl {
     float: left;
@@ -90,6 +93,7 @@
 </head>
 
 <body>
+
   <div>
     <ul class="layui-nav layui-bg-black navP" lay-filter="">
       <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
@@ -98,8 +102,8 @@
       <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
       <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
 
-      <li class="layui-nav-item fr">
-        <a th:href="@{/}"><img th:src="@{//t.cn/RCzsdCq}" class="layui-nav-img">Username</a>
+      <li class="layui-nav-item fr" th:if="${session.username} != null">
+        <a th:href="@{/}"><img th:src="@{//t.cn/RCzsdCq}" class="layui-nav-img" th:text="${session.username}"></a>
         <dl class="layui-nav-child"> <!-- 二级菜单 -->
           <dd><a th:href="@{/}">Profile</a></dd>
           <dd><a th:href="@{/}">Your Reviews</a></dd>
@@ -107,7 +111,11 @@
         </dl>
       </li>
 
+      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in / Sign up</a></li>
       <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
+
+
+
     </ul>
   </div>
 
@@ -216,6 +224,7 @@
   <div id="test2" >
   </div>
   TODO
+  <span th:text="${session.username}"></span>
 
 
 
@@ -261,6 +270,7 @@
       });
     });
   </script>
+
 
 </body>
 </html>

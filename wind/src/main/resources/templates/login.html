@@ -81,7 +81,8 @@
                     success: function(res) {
                         if (res.code == 0) {
                             layer.msg('Login Success', {icon: 6,time:1000}, function () {
-                                window.location = '/index';
+                                sessionStorage.setItem('username', 'valuedsadsadsad');
+                                window.location = '/';
                             });
                         } else {
                             console.log(res.msg);

@@ -19,8 +19,8 @@ public class AlbumController {
     @Autowired
     AlbumService albumService;
 
-    @GetMapping("/{id}")
-    public String getEmpById(@PathVariable("id") Integer id, Model model){
+    @GetMapping("/{id}") // TODO
+    public String getAlbumById(@PathVariable("id") Integer id, Model model){
         return "album";
     }
 
