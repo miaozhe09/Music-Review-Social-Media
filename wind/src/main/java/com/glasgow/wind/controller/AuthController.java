@@ -23,9 +23,9 @@ public class AuthController {
     UserService userService;
 
     @PostMapping("/register")
-    public Object register(@RequestBody Map<String,String> map){
+    public Object register(@RequestBody Map<String,String> map, HttpSession session){
         String username = map.get("username");
-        String password = map.get("password");
+        String password = map.get("password1");
 
         // parameter validate TODO
 
@@ -35,6 +35,8 @@ public class AuthController {
 
         userService.add(user);
 
+        session.setAttribute("username", username);
+        session.setAttribute("avatar","c1.jpg");
         return ResponseUtil.ok();
     }
 

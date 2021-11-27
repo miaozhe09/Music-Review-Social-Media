@@ -21,6 +21,11 @@ public class WebController {
         return "login";
     }
 
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
+
     @RequestMapping("/addAlbum")
     public String addAlbum(){
         return "addAlbum";

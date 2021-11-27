@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+
+    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        h1 {
+            margin: 0 auto;
+            width:200px;
+            font-size: 50px;
+        }
+
+        .center-block {
+            margin: 0 auto;
+            width:320px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div>
+    <h1>Sign up</h1>
+</div>
+<br><br>
+
+<div class="layui-form center-block">
+    <form id="form-register" class="layui-form" action="">
+        <div class="layui-form-item">
+            <input type="text" id="username" name="username" lay-verify="account" placeholder="Username"
+                   autocomplete="off" class="layui-input">
+        </div>
+
+        <div class="layui-form-item">
+            <input type="password" id="password1" name="password1" lay-verify="password" placeholder="Password"
+                   autocomplete="off" class="layui-input" >
+        </div>
+
+        <div class="layui-form-item">
+            <input type="password" id="password2" name="password2" lay-verify="password" placeholder="Confirm Your Password"
+                   autocomplete="off" class="layui-input" >
+        </div>
+
+        <div class="layui-form-item">
+            <button id="btn-register" class="layui-btn layui-btn-fluid" lay-submit=""
+                    lay-filter="register">Submit
+            </button>
+        </div>
+    </form>
+</div>
+
+<script th:inline="javascript">
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form,
+            layer = layui.layer;
+
+        form.on('submit(register)', function () {
+            var username=$("#username").val();
+            var password1=$("#password1").val();
+            var password2=$("#password2").val();
+            if (username == '') {
+                layer.msg('Username can not be empty!');
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            }
+            if (password1 == '') {
+                layer.msg('Password can not be empty!');
+                return false;
+            }
+
+            var fields = $('#form-register').serializeArray();
+            var obj = {};
+            $.each(fields, function(index, field) {
+                obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+            })
+            $.ajax({
+                url: "/auth/register",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),//将对象转为json字符串
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Register Success', {icon: 6,time:1000}, function () {
+                            window.location = '/';
+                        });
+                    } else {
+                        layer.msg(res.msg, {icon: 5,time:3000});
+                    }
+                },
+                error: function(){
+                    layer.msg('Register Fail', {icon: 5,time:3000});
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
