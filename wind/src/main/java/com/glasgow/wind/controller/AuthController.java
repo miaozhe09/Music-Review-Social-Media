@@ -29,6 +29,11 @@ public class AuthController {
 
         // parameter validate TODO
 
+        List<User> users = userService.queryByUsername(username);
+        if(users.size() != 0){
+            return ResponseUtil.fail("Username already exists!");
+        }
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -36,7 +41,7 @@ public class AuthController {
         userService.add(user);
 
         session.setAttribute("username", username);
-        session.setAttribute("avatar","c1.jpg");
+        session.setAttribute("avatar","images/defaultAvatar.jpg");
         return ResponseUtil.ok();
     }
 
@@ -54,12 +59,12 @@ public class AuthController {
             return ResponseUtil.fail("The password is incorrect!");
         }
 
+        String avatar = users.get(0).getAvatar();
+
         session.setAttribute("username", username);
-        session.setAttribute("avatar","c1.jpg");
+        session.setAttribute("avatar","images/defaultAvatar.jpg");
+        // session.setAttribute("avatar", avatar); TODO
         return ResponseUtil.ok();
     }
-
-
-
 
 }
