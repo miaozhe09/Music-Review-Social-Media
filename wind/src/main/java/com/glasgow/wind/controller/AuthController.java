@@ -37,11 +37,12 @@ public class AuthController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setAvatar("images/defaultAvatar.jpg");
 
         userService.add(user);
 
         session.setAttribute("username", username);
-        session.setAttribute("avatar","images/defaultAvatar.jpg");
+        session.setAttribute("avatar",user.getAvatar());
         return ResponseUtil.ok();
     }
 
@@ -62,8 +63,7 @@ public class AuthController {
         String avatar = users.get(0).getAvatar();
 
         session.setAttribute("username", username);
-        session.setAttribute("avatar","images/defaultAvatar.jpg");
-        // session.setAttribute("avatar", avatar); TODO
+        session.setAttribute("avatar", avatar);
         return ResponseUtil.ok();
     }
 
