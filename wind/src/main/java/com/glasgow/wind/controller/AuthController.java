@@ -6,23 +6,21 @@ import com.glasgow.wind.service.UserService;
 import com.glasgow.wind.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     UserService userService;
 
     @PostMapping("/register")
+    @ResponseBody
     public Object register(@RequestBody Map<String,String> map, HttpSession session){
         String username = map.get("username");
         String password = map.get("password1");
@@ -36,7 +34,7 @@ public class AuthController {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(password); // encryption TODO
         user.setAvatar("images/defaultAvatar.jpg");
 
         userService.add(user);
@@ -47,6 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public Object login(@RequestBody Map<String,String> map, HttpSession session){
         // System.out.println(map);
         String username = map.get("username");
@@ -67,4 +66,10 @@ public class AuthController {
         return ResponseUtil.ok();
     }
 
+    @RequestMapping("/logout")
+    public Object logout(HttpSession session){
+        session.removeAttribute("username");
+        session.removeAttribute("avatar");
+        return "redirect:/";
+    }
 }
