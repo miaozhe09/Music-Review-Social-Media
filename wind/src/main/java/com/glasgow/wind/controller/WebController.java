@@ -16,29 +16,9 @@ public class WebController {
         return "/index";
     }
 
-    @RequestMapping("/register")
-    public String register() {
-        return "/register";
-    }
-
-    @RequestMapping("/login")
-    public String login() {
-        return "/login";
-    }
-
-    @RequestMapping("/search")
-    public String search() {
-        return "/search";
-    }
-
     @RequestMapping("/profile/{username}")
     public String profile(){
         return "/profile";
-    }
-
-    @RequestMapping("/addAlbum")
-    public String addAlbum(){
-        return "/addAlbum";
     }
 
     @RequestMapping("/addAlbumSuccessfully")

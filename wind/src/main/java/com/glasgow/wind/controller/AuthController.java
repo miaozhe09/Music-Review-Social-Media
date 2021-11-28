@@ -19,6 +19,11 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/register")
+    public String register() {
+        return "/register";
+    }
+
     @PostMapping("/register")
     @ResponseBody
     public Object register(@RequestBody Map<String,String> map, HttpSession session){
@@ -44,6 +49,11 @@ public class AuthController {
         return ResponseUtil.ok();
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+
     @PostMapping("/login")
     @ResponseBody
     public Object login(@RequestBody Map<String,String> map, HttpSession session){
@@ -66,7 +76,7 @@ public class AuthController {
         return ResponseUtil.ok();
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public Object logout(HttpSession session){
         session.removeAttribute("username");
         session.removeAttribute("avatar");

@@ -110,8 +110,8 @@
         </dl>
       </li>
 
-      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
-      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
+      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/register}">Sign up</a></li>
+      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/login}">Log in</a></li>
       <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
 
     </ul>
@@ -120,13 +120,13 @@
   <div class="layui-carousel carouselM" id="test1">
     <div carousel-item >
       <div>
-        <a th:href="@{/album/1}"><img src="images/c1.jpg" style="width: 47%; "></a>
+        <a th:href="@{/album/1}"><img src="/images/c1.jpg" style="width: 47%; "></a>
         <a th:href="@{/album/2}"><img src="images/c2.jpg" style="width: 47%;" class="fr"></a>
       </div>
 
       <div>
-        <a th:href="@{/album/3}"><img src="images/c3.jpg" style="width: 47%;"></a>
-        <a th:href="@{/album/4}"><img src="images/c4.jpg" style="width: 47%;" class="fr"></a>
+        <a th:href="@{/album/3}"><img src="/images/c3.jpg" style="width: 47%;"></a>
+        <a th:href="@{/album/4}"><img src="/images/c4.jpg" style="width: 47%;" class="fr"></a>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
     <div class="box-bd">
       <ul class="clearFix">
         <li>
-          <a th:href="@{/album/5}"><img src="images/n1.jpg" ></a>
+          <a th:href="@{/album/5}"><img src="/images/n1.jpg" ></a>
           <h4>
             Abbey Road
           </h4>
@@ -150,7 +150,7 @@
           </div>
         </li>
         <li>
-          <a th:href="@{/album/6}"><img th:src="@{images/n2.jpg}" ></a>
+          <a th:href="@{/album/6}"><img th:src="@{/images/n2.jpg}" ></a>
           <h4>
             KID A MNESIA
           </h4>
@@ -159,7 +159,7 @@
           </div>
         </li>
         <li>
-          <a th:href="@{/album/7}"><img src="images/n3.jpg" ></a>
+          <a th:href="@{/album/7}"><img src="/images/n3.jpg" ></a>
           <h4>
             Savage
           </h4>
@@ -168,7 +168,7 @@
           </div>
         </li>
         <li style="margin-right: 0">
-          <a th:href="@{/album/8}"><img src="images/n4.jpg" ></a>
+          <a th:href="@{/album/8}"><img src="/images/n4.jpg" ></a>
           <h4>
             Wild Dreams
           </h4>
@@ -177,7 +177,7 @@
           </div>
         </li>
         <li>
-          <a th:href="@{/album/9}"><img src="images/n5.jpg" ></a>
+          <a th:href="@{/album/9}"><img src="/images/n5.jpg" ></a>
           <h4>
             Music of the Spheres
           </h4>
@@ -186,7 +186,7 @@
           </div>
         </li>
         <li>
-          <a th:href="@{/album/10}"><img src="images/n6.jpg" ></a>
+          <a th:href="@{/album/10}"><img src="/images/n6.jpg" ></a>
           <h4>
             SIGN
           </h4>
@@ -195,7 +195,7 @@
           </div>
         </li>
         <li>
-          <a th:href="@{/album/11}"><img src="images/n7.jpg" ></a>
+          <a th:href="@{/album/11}"><img src="/images/n7.jpg" ></a>
           <h4>
             Before
           </h4>
@@ -204,7 +204,7 @@
           </div>
         </li>
         <li style="margin-right: 0">
-          <a th:href="@{/album/12}"><img src="images/n8.jpg" ></a>
+          <a th:href="@{/album/12}"><img src="/images/n8.jpg" ></a>
           <h4>
             Apple
           </h4>

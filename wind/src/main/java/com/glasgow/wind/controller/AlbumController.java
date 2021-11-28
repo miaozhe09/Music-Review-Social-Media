@@ -31,11 +31,15 @@ public class AlbumController {
         return "redirect:/"; // if the album does not exist
     }
 
+    @GetMapping("/create")
+    public String addAlbum(){
+        return "/addAlbum";
+    }
+
     @PostMapping("/create")
     @ResponseBody
     public Object create(@RequestBody Album album){
         albumService.add(album);
         return ResponseUtil.ok();
     }
-
 }
