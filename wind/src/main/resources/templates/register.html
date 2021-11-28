@@ -20,95 +20,128 @@
             width:320px;
         }
 
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
     </style>
-
 </head>
-
 <body>
-<div>
-    <h1>Sign up</h1>
-</div>
-<br><br>
+    <div>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
 
-<div class="layui-form center-block">
-    <form id="form-register" class="layui-form" action="">
-        <div class="layui-form-item">
-            <input type="text" id="username" name="username" lay-verify="required" placeholder="Username"
-                   autocomplete="off" class="layui-input">
-        </div>
+            <li class="layui-nav-item fr" th:if="${session.username} != null">
+                <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
+                    <dd><a th:href="@{/}">Avatar</a></dd>
+                    <dd><a th:href="@{/}">Your Reviews</a></dd>
+                    <dd><a th:href="@{/auth/logout}">Log out</a></dd>
+                </dl>
+            </li>
 
-        <div class="layui-form-item">
-            <input type="password" id="password1" name="password1" lay-verify="required" placeholder="Password"
-                   autocomplete="off" class="layui-input" >
-        </div>
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
+            <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
 
-        <div class="layui-form-item">
-            <input type="password" id="password2" name="password2" lay-verify="required" placeholder="Confirm Your Password"
-                   autocomplete="off" class="layui-input" >
-        </div>
+        </ul>
+    </div>
 
-        <div class="layui-form-item">
-            <button id="btn-register" class="layui-btn layui-btn-fluid" lay-submit=""
-                    lay-filter="register">Submit
-            </button>
-        </div>
-    </form>
-</div>
+    <div>
+        <h1>Sign up</h1>
+    </div>
+    <br><br>
 
-<script th:inline="javascript">
-    layui.use(['form', 'layer'], function () {
-        var form = layui.form,
-            layer = layui.layer;
+    <div class="layui-form center-block">
+        <form id="form-register" class="layui-form" action="">
+            <div class="layui-form-item">
+                <input type="text" id="username" name="username" lay-verify="required" placeholder="Username"
+                       autocomplete="off" class="layui-input">
+            </div>
 
-        form.on('submit(register)', function () {
-            var username=$("#username").val();
-            var password1=$("#password1").val();
-            var password2=$("#password2").val();
-            if (username == '') {
-                layer.msg('Username can not be empty!');
-                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-            }
-            if (password1 == '') {
-                layer.msg('Password can not be empty!');
-                return false;
-            }
-            if (password2 == '') {
-                layer.msg('Please confirm your password!');
-                return false;
-            }
-            if(password1 != password2){
-                layer.msg('Please confirm your password!');
-                return false;
-            }
+            <div class="layui-form-item">
+                <input type="password" id="password1" name="password1" lay-verify="required" placeholder="Password"
+                       autocomplete="off" class="layui-input" >
+            </div>
 
-            var fields = $('#form-register').serializeArray();
-            var obj = {};
-            $.each(fields, function(index, field) {
-                obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
-            })
-            $.ajax({
-                url: "/auth/register",
-                type: "POST",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(obj),//将对象转为json字符串
-                success: function(res) {
-                    if (res.code == 0) {
-                        layer.msg('Register Success', {icon: 6,time:1000}, function () {
-                            window.location = '/';
-                        });
-                    } else {
-                        layer.msg(res.msg, {icon: 5,time:3000});
-                    }
-                },
-                error: function(){
-                    layer.msg('Register Fail', {icon: 5,time:3000});
+            <div class="layui-form-item">
+                <input type="password" id="password2" name="password2" lay-verify="required" placeholder="Confirm Your Password"
+                       autocomplete="off" class="layui-input" >
+            </div>
+
+            <div class="layui-form-item">
+                <button id="btn-register" class="layui-btn layui-btn-fluid" lay-submit=""
+                        lay-filter="register">Sign up
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script th:inline="javascript">
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+
+            form.on('submit(register)', function () {
+                var username=$("#username").val();
+                var password1=$("#password1").val();
+                var password2=$("#password2").val();
+                if (username == '') {
+                    layer.msg('Username can not be empty!');
+                    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
                 }
-            });
+                if (password1 == '') {
+                    layer.msg('Password can not be empty!');
+                    return false;
+                }
+                if (password2 == '') {
+                    layer.msg('Please confirm your password!');
+                    return false;
+                }
+                if(password1 != password2){
+                    layer.msg('Please confirm your password!');
+                    return false;
+                }
 
-            return false;
+                var fields = $('#form-register').serializeArray();
+                var obj = {};
+                $.each(fields, function(index, field) {
+                    obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+                })
+                $.ajax({
+                    url: "/auth/register",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),//将对象转为json字符串
+                    success: function(res) {
+                        if (res.code == 0) {
+                            layer.msg('Register Success', {icon: 6,time:1000}, function () {
+                                window.location = '/';
+                            });
+                        } else {
+                            layer.msg(res.msg, {icon: 5,time:3000});
+                        }
+                    },
+                    error: function(){
+                        layer.msg('Register Fail', {icon: 5,time:3000});
+                    }
+                });
+
+                return false;
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

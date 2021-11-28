@@ -4,6 +4,7 @@ import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.service.AlbumService;
 import com.glasgow.wind.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,18 +14,25 @@ import org.springframework.web.bind.annotation.*;
  * @Version 1.0
  */
 
-@RestController
+@Controller
 @RequestMapping("/album")
 public class AlbumController {
     @Autowired
     AlbumService albumService;
 
-    @GetMapping("/{id}") // TODO
-    public String getAlbumById(@PathVariable("id") Integer id, Model model){
-        return "album";
+    @GetMapping("/{id}")
+    public String getAlbumById(@PathVariable("id") int id, Model model){
+        Album album = albumService.queryById(id);
+        if(album != null){
+            model.addAttribute("album", album);
+            return "/album";
+        }
+
+        return "redirect:/"; // if the album does not exist
     }
 
     @PostMapping("/create")
+    @ResponseBody
     public Object create(@RequestBody Album album){
         albumService.add(album);
         return ResponseUtil.ok();

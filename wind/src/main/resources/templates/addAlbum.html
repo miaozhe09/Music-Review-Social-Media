@@ -140,7 +140,7 @@
                 data: JSON.stringify(obj),//将对象转为json字符串
                 success: function(res) {
                     if (res.code == 0) {
-                        location.href = "/addAlbumSuccessfully";
+                        // location.href = "/addAlbumSuccessfully";
                     } else {
                         alert("注册失败！" + res.message);
                     }

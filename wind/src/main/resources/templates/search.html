@@ -20,9 +20,44 @@
             width:320px;
         }
 
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
     </style>
 </head>
 <body>
+    <div>
+    <ul class="layui-nav layui-bg-black navP" lay-filter="">
+        <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+        <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+        <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+        <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+        <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+
+        <li class="layui-nav-item fr" th:if="${session.username} != null">
+            <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
+                <dd><a th:href="@{/}">Avatar</a></dd>
+                <dd><a th:href="@{/}">Your Reviews</a></dd>
+                <dd><a th:href="@{/auth/logout}">Log out</a></dd>
+            </dl>
+        </li>
+
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
+        <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
+
+    </ul>
+</div>
+
     <div>
         <h1>Search</h1>
     </div>

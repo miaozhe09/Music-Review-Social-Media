@@ -21,17 +21,11 @@ public class SearchController {
     @Autowired
     AlbumService albumService;
 
-    @GetMapping("")
-    public String search() {
-        return "/search";
-    }
 
     @GetMapping("/all")
     public String searchResult(@RequestParam("keyword")String keyword, Model model){
-
         List<Album> albums = albumService.queryByKeyword(keyword);
         model.addAttribute("albumList", albums);
-
 
         return "/searchResult";
     }

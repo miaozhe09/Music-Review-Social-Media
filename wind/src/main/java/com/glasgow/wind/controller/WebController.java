@@ -11,34 +11,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class WebController {
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String index(){
-        return "index";
-    }
-
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
+        return "/index";
     }
 
     @RequestMapping("/register")
     public String register() {
-        return "register";
+        return "/register";
     }
 
-    @RequestMapping("/addAlbum")
-    public String addAlbum(){
-        return "addAlbum";
+    @RequestMapping("/login")
+    public String login() {
+        return "/login";
     }
 
-    @RequestMapping("/addAlbumSuccessfully")
-    public String addAlbumSuccessfully(){
-        return "addAlbumSuccessfully";
+    @RequestMapping("/search")
+    public String search() {
+        return "/search";
     }
 
     @RequestMapping("/profile/{username}")
     public String profile(){
-        return "profile";
+        return "/profile";
+    }
+
+    @RequestMapping("/addAlbum")
+    public String addAlbum(){
+        return "/addAlbum";
+    }
+
+    @RequestMapping("/addAlbumSuccessfully")
+    public String addAlbumSuccessfully(){
+        return "/addAlbumSuccessfully";
     }
 
 }

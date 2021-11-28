@@ -10,10 +10,6 @@
   <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
 
   <style>
-    .fl {
-    float: left;
-    }
-
     .fr {
     float: right;
     }
@@ -41,20 +37,23 @@
     .box-hd {
       height: 45px;
     }
+
     .box-hd h3 {
       float: left;
       font-size: large;
       color: black;
     }
+
     .box-hd a {
       float: right;
       font-size: large;
       color: gray;
     }
-    /* 把li 的父亲ul 修改的足够宽一行能装开5个盒子就不会换行了 */
+
     .box-bd ul {
       width: 100%;
     }
+
     .box-bd ul li {
       float: left;
       width: 23.5%;
@@ -63,15 +62,18 @@
       margin-right: 2%;
       margin-bottom: 35px;
     }
+
     .box-bd ul li img {
       width: 100%;
     }
+
     .box-bd ul li h4 {
       margin: 15px 20px 10px 25px;
       font-size: 16px;
       color: black;
       font-weight: 400;
     }
+
     .box-bd .info {
       margin: 0 20px 0 25px;
       font-size: 14px;
@@ -82,16 +84,17 @@
       content:"";
       display:table;
     }
+
     .clearFix:after {
       clear:both;
     }
+
     .clearFix {
       *zoom:1;
     }
 
   </style>
 </head>
-
 <body>
   <div>
     <ul class="layui-nav layui-bg-black navP" lay-filter="">
@@ -149,7 +152,6 @@
           <div class="info">
             The Beatles
           </div>
-
         </li>
         <li>
           <img src="images/n1.jpg" alt="">
@@ -214,7 +216,6 @@
             The Beatles
           </div>
         </li>
-
       </ul>
     </div>
   </div>
@@ -250,7 +251,5 @@
       });
     });
   </script>
-
-
 </body>
 </html>

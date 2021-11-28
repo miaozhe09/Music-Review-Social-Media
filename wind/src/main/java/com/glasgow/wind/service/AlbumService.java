@@ -38,4 +38,9 @@ public class AlbumService {
         return albumMapper.selectByExample(example);
     }
 
+    public Album queryById(Integer id){
+        Album album = albumMapper.selectByPrimaryKey(id);
+        return album;
+    }
+
 }
