@@ -10,10 +10,32 @@
             float: right;
         }
 
+        .fl {
+            float: left;
+        }
+
         .navP{
             padding-left: 10%;
             padding-right: 15%;
             margin-bottom: 30px;
+        }
+
+        .box {
+            margin-left: 12.5%;
+            margin-right:17.5%;
+        }
+
+        .box1 {
+            margin-left: 12.5%;
+            margin-right:3.5%;
+        }
+
+        h3{
+            color: #009688;
+        }
+
+        .clear{
+            clear: both;
         }
 
     </style>
@@ -44,26 +66,32 @@
     </ul>
 </div>
 
-    <div>
-        <img th:src="@{${album.coverUrl}}" >
+    <div class="box1 fl">
+        <img th:src="@{${album.coverUrl}}" height="200" width="200" >
     </div>
 
-    <div>
-        <p th:text="${album.name}"></p>
-        <p th:text="${album.artist}"></p>
-        <p th:text="${album.type}"></p>
-        <p th:text="${album.releaseDate}"></p>
+    <div class="box">
+        <h1 th:text="${album.name}"></h1>
+        <br>
+        <span style="color: grey">Artist: </span>
+        <span th:text="${album.artist}"></span> <br>
+        <span style="color: grey">Genre: </span>
+        <span th:text="${album.type}"></span> <br>
+        <span style="color: grey">Release Date: </span>
+        <span th:text="${album.releaseDate}"></span> <br>
     </div>
-    <br><br>
 
-    <div>
+    <div class="box clear">
+        <br>
+        <h3>Introduction</h3>
         <p th:text="${album.introduction}"></p>
     </div>
-    <br><br>
+    <br>
 
-    <div>
+    <div class="box">
+        <h3>Track Listing</h3>
         <p th:text="${album.trackListing}"></p>
     </div>
-    <br><br>
+    <br>
 </body>
 </html>
