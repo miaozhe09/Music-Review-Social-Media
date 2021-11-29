@@ -21,7 +21,7 @@ public class SearchController {
     @Autowired
     AlbumService albumService;
 
-    @GetMapping("/")
+    @GetMapping
     public String search() {
         return "/search";
     }
