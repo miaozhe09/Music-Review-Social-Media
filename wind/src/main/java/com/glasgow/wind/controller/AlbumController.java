@@ -42,4 +42,11 @@ public class AlbumController {
         albumService.add(album);
         return ResponseUtil.ok();
     }
+
+    @GetMapping("/{id}/addComment")
+    public String addComment(@PathVariable("id") int id, Model model){
+        Album album = albumService.queryById(id);
+        model.addAttribute("album", album);
+        return "/addComment";
+    }
 }

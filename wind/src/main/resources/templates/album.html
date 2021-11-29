@@ -5,6 +5,8 @@
     <title>Album</title>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
+    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
     <style>
         .fr {
             float: right;
@@ -38,7 +40,9 @@
             clear: both;
         }
 
-
+        .colorB {
+            color: darkblue;
+        }
 
     </style>
 </head>
@@ -80,7 +84,14 @@
         <span style="color: grey">Genre: </span>
         <span th:text="${album.type}"></span> <br>
         <span style="color: grey">Release Date: </span>
-        <span th:text="${album.releaseDate}"></span> <br>
+        <span th:text="${album.releaseDate}"></span> <br><br>
+        <span style="color: grey">Rate: </span>
+        <div id="test2" >
+        </div>
+        <br>
+        <a class="colorB" th:href="@{/1/addComment}"> Add comment</a> ,
+        <a class="colorB" th:href="@{/}"> Add review</a>
+
     </div>
 
     <div class="box clear">
@@ -95,5 +106,27 @@
         <p th:text="${album.trackListing}"></p>
     </div>
     <br>
+
+    <div class="box">
+        <h3>Short Comments(TODO)</h3>
+    </div>
+    <br>
+
+    <div class="box">
+        <h3>Music Reviews(TODO)</h3>
+    </div>
+    <br>
+
+    <script>
+        layui.use('rate', function(){
+            var rate = layui.rate;
+
+            //渲染
+            var ins1 = rate.render({
+                elem: '#test2'  //绑定元素
+                ,half: true
+            });
+        });
+    </script>
 </body>
 </html>

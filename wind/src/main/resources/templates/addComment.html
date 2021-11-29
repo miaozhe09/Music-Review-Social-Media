@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+</head>
+<body>
+    <div class="box clear">
+        <br>
+        <h3>Introduction</h3>
+        <p th:text="${album.name}"></p>
+    </div>
+</body>
+</html>
