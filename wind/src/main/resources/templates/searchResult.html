@@ -36,6 +36,27 @@
             padding-right: 15%;
             margin-bottom: 30px;
         }
+
+        h1 {
+            width:500px;
+            font-size: 40px;
+            color: #009688;
+        }
+
+        h2 {
+            width:500px;
+            font-size: 30px;
+            color: #009688;
+        }
+
+        .colorB {
+            color: darkblue;
+        }
+
+        .colorG {
+            color: #009688;
+        }
+
     </style>
 </head>
 <body>
@@ -64,9 +85,17 @@
     </ul>
 </div>
 
+    <div class="box">
+        <h1>Search Results</h1>
+    </div>
+
+    <div class="box">
+        <h2>Albums</h2>
+    </div>
+
     <div class="box" th:each="album,albumStat:${albumList}">
         <div class="fl box1">
-            <img th:src="@{${album.coverUrl}}" height="150" width="150" >
+            <a th:href="@{/album/{id}(id=${album.id})}"><img th:src="@{${album.coverUrl}}" height="150" width="150"  ></a>
         </div>
 
         <div class="clear">
@@ -78,7 +107,13 @@
 
     </div>
 
-    <a th:href="@{/album/create}">添加唱片</a>
+    <div class="box">
+        <span class="colorG" >If the album or artist you're looking for isn't listed, please: </span>
+        <a class="colorB" th:href="@{/album/create}"> Add album</a> ,
+        <a class="colorB" th:href="@{/album/create}"> Add artist</a>
+    </div>
+
+
 
 
 
