@@ -120,9 +120,16 @@
     </div>
     <br>
 
+    <input type="hidden" th:value="${album.id}" id="albumId"/>
+    <input type="hidden" th:value="${session.userId}" id="userId"/>
+
     <script>
         layui.use('rate', function(){
             var rate = layui.rate;
+            var albumId =$("#albumId").val();
+            var userId =$("#userId").val();
+            console.log(albumId);
+            console.log(userId);
 
             //渲染
             var ins1 = rate.render({
@@ -130,7 +137,7 @@
                 ,half: true
                 ,text: true
                 ,setText: function(value){
-                    this.span.text(value);
+                    this.span.text(value + "-star");
                 }
             });
 
@@ -138,14 +145,13 @@
             });
 
             $.ajax({
-                url: "/rate/1/1",
+                url: "/rate/" + albumId + "/" + userId,
                 type: "GET",
                 dataType: "json",
-                contentType: "application/json",
                 success: function(res) {
                     if (res.code == 0) {
-                        layer.msg('ok', {icon: 6,time:1000}, function () {
-                        });
+                        ins1.config.value = res.data;
+                        rate.render(ins1.config);
                     } else {
                     }
                 },

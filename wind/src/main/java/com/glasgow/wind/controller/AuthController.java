@@ -44,6 +44,7 @@ public class AuthController {
 
         userService.add(user);
 
+        session.setAttribute("userId", user.getId());
         session.setAttribute("username", username);
         session.setAttribute("avatar",user.getAvatar());
         return ResponseUtil.ok();
@@ -69,15 +70,15 @@ public class AuthController {
             return ResponseUtil.fail("The password is incorrect!");
         }
 
-        String avatar = users.get(0).getAvatar();
-
+        session.setAttribute("userId", users.get(0).getId());
         session.setAttribute("username", username);
-        session.setAttribute("avatar", avatar);
+        session.setAttribute("avatar", users.get(0).getAvatar());
         return ResponseUtil.ok();
     }
 
     @GetMapping("/logout")
     public Object logout(HttpSession session){
+        session.removeAttribute("userId");
         session.removeAttribute("username");
         session.removeAttribute("avatar");
         return "redirect:/";
