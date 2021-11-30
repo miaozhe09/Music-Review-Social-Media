@@ -135,13 +135,34 @@
             var ins1 = rate.render({
                 elem: '#test1'  //绑定元素
                 ,half: true
-                ,text: true
-                ,setText: function(value){
-                    this.span.text(value + "-star");
-                }
+
             });
 
-            $("#test1").click(function(value){
+            $("#test1").click(function(){
+                var star = ins1.config.value;
+
+                if(userId == ''){
+                    location.href = "/auth/login";
+                }
+
+                var obj = {};
+                obj["albumId"] = albumId; obj["userId"] = userId; obj["star"] = star;
+
+                $.ajax({
+                    url: "/rate/create",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),
+                    success: function(res) {
+                        if (res.code == 0) {
+                            layer.msg('Rate Success', {icon: 6,time:2000});
+                        } else {
+                        }
+                    },
+                    error: function(){
+                    }
+                });
             });
 
             $.ajax({
@@ -158,7 +179,6 @@
                 error: function(){
                 }
             });
-
 
         });
     </script>

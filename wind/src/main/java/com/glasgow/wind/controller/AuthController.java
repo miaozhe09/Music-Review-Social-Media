@@ -44,7 +44,7 @@ public class AuthController {
 
         userService.add(user);
 
-        session.setAttribute("userId", user.getId());
+        session.setAttribute("userId", user.getId()); // TODO
         session.setAttribute("username", username);
         session.setAttribute("avatar",user.getAvatar());
         return ResponseUtil.ok();
