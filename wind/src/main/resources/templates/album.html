@@ -84,13 +84,16 @@
         <span style="color: grey">Genre: </span>
         <span th:text="${album.type}"></span> <br>
         <span style="color: grey">Release Date: </span>
-        <span th:text="${album.releaseDate}"></span> <br><br>
-        <span style="color: grey">Rate: </span>
-        <div id="test2" >
+        <span th:text="${album.releaseDate}"></span> <br>
+        <span style="color: grey">User ratings: </span>
+        <span>3.5 From 5205 Ratings</span><br>
+        <span style="color: grey">Your rating: </span>
+        <div id="test1" >
         </div>
-        <br>
-        <a class="colorB" th:href="@{/1/addComment}"> Add comment</a> ,
-        <a class="colorB" th:href="@{/}"> Add review</a>
+        <br><i class="layui-icon layui-icon-edit"></i>
+        <a class="colorB" th:href="@{/album/1/addComment}"> Write a comment  </a>
+        <br><i class="layui-icon layui-icon-edit"></i>
+        <a class="colorB" th:href="@{/}"> Write a review</a>
 
     </div>
 
@@ -123,7 +126,7 @@
 
             //渲染
             var ins1 = rate.render({
-                elem: '#test2'  //绑定元素
+                elem: '#test1'  //绑定元素
                 ,half: true
             });
         });

@@ -112,7 +112,7 @@
 
       <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/register}">Sign up</a></li>
       <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/login}">Log in</a></li>
-      <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
+      <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
     </ul>
   </div>
