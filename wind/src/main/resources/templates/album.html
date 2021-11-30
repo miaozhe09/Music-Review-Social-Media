@@ -88,7 +88,7 @@
         <span style="color: grey">User ratings: </span>
         <span>3.5 From 5205 Ratings</span><br>
         <span style="color: grey">Your rating: </span>
-        <div id="test1" >
+        <div id="test1" lay-filter="rate" >
         </div>
         <br><i class="layui-icon layui-icon-edit"></i>
         <a class="colorB" th:href="@{/album/1/addComment}"> Write a comment  </a>
@@ -128,7 +128,32 @@
             var ins1 = rate.render({
                 elem: '#test1'  //绑定元素
                 ,half: true
+                ,text: true
+                ,setText: function(value){
+                    this.span.text(value);
+                }
             });
+
+            $("#test1").click(function(value){
+            });
+
+            $.ajax({
+                url: "/rate/1/1",
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('ok', {icon: 6,time:1000}, function () {
+                        });
+                    } else {
+                    }
+                },
+                error: function(){
+                }
+            });
+
+
         });
     </script>
 </body>
