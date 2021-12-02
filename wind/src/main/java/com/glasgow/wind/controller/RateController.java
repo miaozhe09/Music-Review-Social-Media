@@ -19,6 +19,7 @@ public class RateController {
     @GetMapping("/{albumId}/{userId}")
     @ResponseBody
     public Object getRateByAlbumIdAndUserId(@PathVariable("albumId") int albumId, @PathVariable("userId") int userId, Model model){
+
         return ResponseUtil.ok(1);
     }
 
