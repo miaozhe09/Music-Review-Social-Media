@@ -6,6 +6,8 @@ import com.glasgow.wind.domain.RatingExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -30,10 +32,23 @@ public class RatingService {
         ratingMapper.insertSelective(rating);
     }
 
-    public Object getRatingCount(int albumId){
+    public Object getAlbumRatingCount(int albumId){
         RatingExample example = new RatingExample();
         example.createCriteria().andAlbumIdEqualTo(albumId);
 
         return ratingMapper.countByExample(example);
+    }
+
+    public double getAlbumAverageRating(int albumId){
+        RatingExample example = new RatingExample();
+        example.createCriteria().andAlbumIdEqualTo(albumId);
+        List<Rating> ratings = ratingMapper.selectByExample(example);
+
+        BigDecimal sum = new BigDecimal(0);
+        for (int i = 0; i < ratings.size(); i++) {
+            sum = sum.add(ratings.get(i).getScore());
+        }
+
+        return sum.divide(new BigDecimal(ratings.size()), 2, RoundingMode.HALF_UP).doubleValue();
     }
 }

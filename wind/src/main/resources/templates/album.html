@@ -87,7 +87,8 @@
         <span th:text="${album.releaseDate}"></span> <br>
         <span style="color: grey">User ratings: </span>
         <span th:if="${ratingCount} >= 10">
-            <span>3.5 From</span>
+            <span th:text="${averageRating}"></span>
+            <span> From</span>
             <span th:text="${ratingCount}"></span>
             <span> Ratings</span>
         </span>

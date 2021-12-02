@@ -1,5 +1,7 @@
 package com.glasgow.wind.domain;
 
+import java.math.BigDecimal;
+
 public class Rating {
     private Integer id;
 
@@ -7,7 +9,7 @@ public class Rating {
 
     private Integer userId;
 
-    private Long score;
+    private BigDecimal score;
 
     public Integer getId() {
         return id;
@@ -33,11 +35,11 @@ public class Rating {
         this.userId = userId;
     }
 
-    public Long getScore() {
+    public BigDecimal getScore() {
         return score;
     }
 
-    public void setScore(Long score) {
+    public void setScore(BigDecimal score) {
         this.score = score;
     }
 }

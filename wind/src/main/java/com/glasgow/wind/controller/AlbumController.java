@@ -29,8 +29,11 @@ public class AlbumController {
         Album album = albumService.queryById(id);
         if(album != null){
             model.addAttribute("album", album);
-
-            model.addAttribute("ratingCount", ratingService.getRatingCount(id));
+            Object albumRatingCount = ratingService.getAlbumRatingCount(id);
+            model.addAttribute("ratingCount",albumRatingCount);
+            if((long)albumRatingCount >= 10){
+                model.addAttribute("averageRating", ratingService.getAlbumAverageRating(id));
+            }
 
             return "/album";
         }
