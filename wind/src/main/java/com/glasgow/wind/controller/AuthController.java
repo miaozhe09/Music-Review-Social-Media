@@ -40,11 +40,11 @@ public class AuthController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password); // encryption TODO
-        user.setAvatar("images/defaultAvatar.jpg");
+        user.setAvatar("/images/defaultAvatar.jpg");
 
         userService.add(user);
 
-        session.setAttribute("userId", user.getId()); // TODO
+        session.setAttribute("userId", userService.queryByUsername(username).get(0).getId());
         session.setAttribute("username", username);
         session.setAttribute("avatar",user.getAvatar());
         return ResponseUtil.ok();
