@@ -3,7 +3,6 @@ package com.glasgow.wind.service;
 import com.glasgow.wind.dao.RatingMapper;
 import com.glasgow.wind.domain.Rating;
 import com.glasgow.wind.domain.RatingExample;
-import com.glasgow.wind.domain.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +28,12 @@ public class RatingService {
 
     public void add(Rating rating){
         ratingMapper.insertSelective(rating);
+    }
+
+    public Object getRatingCount(int albumId){
+        RatingExample example = new RatingExample();
+        example.createCriteria().andAlbumIdEqualTo(albumId);
+
+        return ratingMapper.countByExample(example);
     }
 }

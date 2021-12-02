@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author Zhe Miao Guid: 2598803M
@@ -47,4 +46,6 @@ public class RatingController {
         ratingService.add(rating);
         return ResponseUtil.ok();
     }
+
+
 }

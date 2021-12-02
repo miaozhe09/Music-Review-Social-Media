@@ -86,7 +86,15 @@
         <span style="color: grey">Release Date: </span>
         <span th:text="${album.releaseDate}"></span> <br>
         <span style="color: grey">User ratings: </span>
-        <span>3.5 From 5205 Ratings</span><br>
+        <span th:if="${ratingCount} >= 10">
+            <span>3.5 From</span>
+            <span th:text="${ratingCount}"></span>
+            <span> Ratings</span>
+        </span>
+        <span th:if="${ratingCount} < 10">
+            Insufficient number of ratings (less than 10)
+        </span>
+        <br>
         <span style="color: grey">Your rating: </span>
         <div id="test1" lay-filter="rate" >
         </div>

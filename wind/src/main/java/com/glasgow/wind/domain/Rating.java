@@ -7,7 +7,7 @@ public class Rating {
 
     private Integer userId;
 
-    private Integer score;
+    private Long score;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class Rating {
         this.userId = userId;
     }
 
-    public Integer getScore() {
+    public Long getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Long score) {
         this.score = score;
     }
 }

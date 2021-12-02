@@ -2,6 +2,7 @@ package com.glasgow.wind.controller;
 
 import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.service.AlbumService;
+import com.glasgow.wind.service.RatingService;
 import com.glasgow.wind.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,17 @@ public class AlbumController {
     @Autowired
     AlbumService albumService;
 
+    @Autowired
+    RatingService ratingService;
+
     @GetMapping("/{id}")
     public String getAlbumById(@PathVariable("id") int id, Model model){
         Album album = albumService.queryById(id);
         if(album != null){
             model.addAttribute("album", album);
+
+            model.addAttribute("ratingCount", ratingService.getRatingCount(id));
+
             return "/album";
         }
 

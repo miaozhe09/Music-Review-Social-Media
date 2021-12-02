@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="album_id" jdbcType="INTEGER" property="albumId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -102,7 +102,7 @@
     insert into rating (id, album_id, user_id, 
       score)
     values (#{id,jdbcType=INTEGER}, #{albumId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{score,jdbcType=INTEGER})
+      #{score,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.glasgow.wind.domain.Rating">
     insert into rating
@@ -131,7 +131,7 @@
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="score != null">
-        #{score,jdbcType=INTEGER},
+        #{score,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -154,7 +154,7 @@
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.score != null">
-        score = #{record.score,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null">
@@ -166,7 +166,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       album_id = #{record.albumId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      score = #{record.score,jdbcType=INTEGER}
+      score = #{record.score,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,7 +181,7 @@
         user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="score != null">
-        score = #{score,jdbcType=INTEGER},
+        score = #{score,jdbcType=DECIMAL},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -190,7 +190,7 @@
     update rating
     set album_id = #{albumId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
-      score = #{score,jdbcType=INTEGER}
+      score = #{score,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
