@@ -36,7 +36,15 @@ public class RatingController {
 
     @PostMapping("/create")
     @ResponseBody
-    public Object create(@RequestBody Map<String,String> map){
+    public Object create(@RequestBody Rating rating){
+        Integer userId = rating.getUserId();
+        Integer albumId = rating.getAlbumId();
+        List<Rating> ratings = ratingService.queryByAlbumIdAndUserId(albumId, userId);
+        if(ratings.size() != 0){
+            return ResponseUtil.fail();
+        }
+
+        ratingService.add(rating);
         return ResponseUtil.ok();
     }
 }

@@ -26,4 +26,8 @@ public class RatingService {
 
         return ratingMapper.selectByExample(example);
     }
+
+    public void add(Rating rating){
+        ratingMapper.insertSelective(rating);
+    }
 }

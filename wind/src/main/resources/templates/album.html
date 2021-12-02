@@ -128,8 +128,8 @@
             var rate = layui.rate;
             var albumId =$("#albumId").val();
             var userId =$("#userId").val();
-            console.log(albumId);
-            console.log(userId);
+            // console.log(albumId);
+            // console.log(userId);
 
             //渲染
             var ins1 = rate.render({
@@ -138,15 +138,32 @@
 
             });
 
+            $.ajax({
+                url: "/rate/" + albumId + "/" + userId,
+                type: "GET",
+                dataType: "json",
+                success: function(res) {
+                    if (res.code == 0) {
+                        ins1.config.value = res.data;
+                        ins1.config.readonly = true;
+                        rate.render(ins1.config);
+                    } else {
+                    }
+                },
+                error: function(){
+                }
+            });
+
             $("#test1").click(function(){
                 var star = ins1.config.value;
+                // console.log(star);
 
                 if(userId == ''){
                     location.href = "/auth/login";
                 }
 
                 var obj = {};
-                obj["albumId"] = albumId; obj["userId"] = userId; obj["star"] = star;
+                obj["albumId"] = albumId; obj["userId"] = userId; obj["score"] = star;
 
                 $.ajax({
                     url: "/rate/create",
@@ -157,27 +174,15 @@
                     success: function(res) {
                         if (res.code == 0) {
                             layer.msg('Rate Success', {icon: 6,time:2000});
+                            ins1.config.readonly = true;
+                            rate.render(ins1.config);
                         } else {
+                            layer.msg('You have rated!', {icon: 6,time:3000});
                         }
                     },
                     error: function(){
                     }
                 });
-            });
-
-            $.ajax({
-                url: "/rate/" + albumId + "/" + userId,
-                type: "GET",
-                dataType: "json",
-                success: function(res) {
-                    if (res.code == 0) {
-                        ins1.config.value = res.data;
-                        rate.render(ins1.config);
-                    } else {
-                    }
-                },
-                error: function(){
-                }
             });
 
         });
