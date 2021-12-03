@@ -35,7 +35,7 @@ public class AlbumController {
                 model.addAttribute("averageRating", ratingService.getAlbumAverageRating(id));
             }
 
-            return "/album";
+            return "/user/album";
         }
 
         return "redirect:/"; // if the album does not exist
@@ -43,7 +43,7 @@ public class AlbumController {
 
     @GetMapping("/create")
     public String addAlbum(){
-        return "/addAlbum";
+        return "/user/addAlbum";
     }
 
     @PostMapping("/create")
@@ -57,6 +57,6 @@ public class AlbumController {
     public String addReview(@PathVariable("id") int id, Model model){
         Album album = albumService.queryById(id);
         model.addAttribute("album", album);
-        return "/addReview";
+        return "/user/addReview";
     }
 }

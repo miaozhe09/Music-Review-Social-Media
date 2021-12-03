@@ -23,7 +23,7 @@ public class SearchController {
 
     @GetMapping
     public String search() {
-        return "/search";
+        return "/user/search";
     }
 
     @GetMapping("/all")
@@ -31,6 +31,6 @@ public class SearchController {
         List<Album> albums = albumService.queryByKeyword(keyword);
         model.addAttribute("albumList", albums);
 
-        return "/searchResult";
+        return "/user/searchResult";
     }
 }

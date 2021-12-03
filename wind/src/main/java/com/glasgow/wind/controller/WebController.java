@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebController {
     @RequestMapping("/")
     public String index(){
-        return "/index";
+        return "/user/index";
     }
 
     @RequestMapping("/profile/{username}")
@@ -23,7 +23,7 @@ public class WebController {
 
     @RequestMapping("/albumToBeReviewed")
     public String albumToBeReviewd(){
-        return "/albumToBeReviewed";
+        return "/user/albumToBeReviewed";
     }
 
 }

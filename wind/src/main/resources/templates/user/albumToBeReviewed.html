@@ -2,22 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Album To Be Reviewed</title>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
-    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script src="/layui/layui.js"></script>
     <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
 
     <style>
         h1 {
             margin: 0 auto;
-            width:200px;
-            font-size: 50px;
-        }
-
-        .center-block {
-            margin: 0 auto;
-            width:320px;
+            width:1000px;
+            font-size: 30px;
         }
 
         .fr {
@@ -30,6 +25,11 @@
             margin-bottom: 30px;
         }
 
+        .box {
+            margin-left: 12.5%;
+            margin-right:37.5%;
+            margin-bottom: 3%;
+        }
     </style>
 </head>
 <body>
@@ -47,33 +47,19 @@
                 <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
                 <dd><a th:href="@{/}">Avatar</a></dd>
                 <dd><a th:href="@{/}">Your Reviews</a></dd>
-                <dd><a th:href="@{/templates/admin/logout}">Log out</a></dd>
+                <dd><a th:href="@{/user/logout}">Log out</a></dd>
             </dl>
         </li>
 
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
-        <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+        <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
     </ul>
 </div>
 
-    <div>
-        <h1>Search</h1>
-    </div>
-    <br><br>
-
-    <div class="layui-form center-block">
-        <form class="layui-form" th:action="@{/search/all}" th:method="get">
-            <div class="layui-form-item">
-                    <input type="text" name="keyword" placeholder="Album or Artist"
-                           autocomplete="off" class="layui-input" lay-verify="required">
-            </div>
-
-            <div class="layui-form-item">
-                    <button class="layui-btn layui-btn-fluid" lay-submit>Search</button>
-            </div>
-        </form>
+    <div class="box">
+        <h1>Thank you for your submission. We will complete the review within 5 working days.</h1>
     </div>
 </body>
 </html>

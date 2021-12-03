@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Home</title>
-  <link rel="stylesheet" th:href="@{layui/css/layui.css}">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
   <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
   <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
@@ -106,12 +106,12 @@
           <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
           <dd><a th:href="@{/}">Avatar</a></dd>
           <dd><a th:href="@{/}">Your Reviews</a></dd>
-          <dd><a th:href="@{/auth/logout}">Log out</a></dd>
+          <dd><a th:href="@{/user/logout}">Log out</a></dd>
         </dl>
       </li>
 
-      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/register}">Sign up</a></li>
-      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/login}">Log in</a></li>
+      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+      <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
       <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
     </ul>

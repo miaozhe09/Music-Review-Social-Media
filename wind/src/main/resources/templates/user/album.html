@@ -61,13 +61,13 @@
                 <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
                 <dd><a th:href="@{/}">Avatar</a></dd>
                 <dd><a th:href="@{/}">Your Reviews</a></dd>
-                <dd><a th:href="@{/templates/admin/logout}">Log out</a></dd>
+                <dd><a th:href="@{/user/logout}">Log out</a></dd>
             </dl>
         </li>
 
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
-        <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+        <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
     </ul>
 </div>

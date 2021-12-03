@@ -2,19 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Album To Be Reviewed</title>
+    <title>Title</title>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
     <script src="/layui/layui.js"></script>
     <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
 
     <style>
-        h1 {
-            margin: 0 auto;
-            width:1000px;
-            font-size: 30px;
-        }
-
         .fr {
             float: right;
         }
@@ -23,12 +17,6 @@
             padding-left: 10%;
             padding-right: 15%;
             margin-bottom: 30px;
-        }
-
-        .box {
-            margin-left: 12.5%;
-            margin-right:37.5%;
-            margin-bottom: 3%;
         }
     </style>
 </head>
@@ -47,19 +35,19 @@
                 <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
                 <dd><a th:href="@{/}">Avatar</a></dd>
                 <dd><a th:href="@{/}">Your Reviews</a></dd>
-                <dd><a th:href="@{/templates/admin/logout}">Log out</a></dd>
+                <dd><a th:href="@{/user/logout}">Log out</a></dd>
             </dl>
         </li>
 
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/templates/admin/register}">Sign up</a></li>
-        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/templates/admin/login}">Log in</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
         <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
     </ul>
 </div>
 
-    <div class="box">
-        <h1>Thank you for your submission. We will complete the review within 5 working days.</h1>
+    <div>
+        <span th:text="${album.name}"></span>
     </div>
 </body>
 </html>
