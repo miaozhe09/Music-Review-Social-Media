@@ -20,46 +20,11 @@
             width:320px;
         }
 
-        .fr {
-            float: right;
-        }
-
-        .navP{
-            padding-left: 10%;
-            padding-right: 15%;
-            margin-bottom: 30px;
-        }
-
     </style>
 </head>
 <body>
     <div>
-        <ul class="layui-nav layui-bg-black navP" lay-filter="">
-            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
-            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
-            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
-            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
-            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
-
-            <li class="layui-nav-item fr" th:if="${session.username} != null">
-                <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
-                <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
-                    <dd><a th:href="@{/}">Avatar</a></dd>
-                    <dd><a th:href="@{/}">Your Reviews</a></dd>
-                    <dd><a th:href="@{/templates/admin/logout}">Log out</a></dd>
-                </dl>
-            </li>
-
-            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/register}">Sign up</a></li>
-            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/login}">Log in</a></li>
-            <li class="layui-nav-item fr"><a th:href="@{/search}">Search</a></li>
-
-        </ul>
-    </div>
-
-    <div>
-        <h1>Log in</h1>
+        <h1>Admin Log in</h1>
     </div>
     <br><br>
 
@@ -106,7 +71,7 @@
                     obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
                 })
                 $.ajax({
-                    url: "/auth/login",
+                    url: "/admin/login",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
@@ -114,7 +79,7 @@
                     success: function(res) {
                         if (res.code == 0) {
                             layer.msg('Login Success', {icon: 6,time:1000}, function () {
-                                window.location = '/';
+                                location.href = "/admin/index";
                             });
                         } else {
                             console.log(res.msg);

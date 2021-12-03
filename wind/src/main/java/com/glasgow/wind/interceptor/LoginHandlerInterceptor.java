@@ -22,7 +22,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             return true;
         }
         //验证不通过
-        response.sendRedirect("/auth/login");
+        response.sendRedirect("/admin/login");
 
         return false; //此时还没生效，必须注册到容器中
     }
