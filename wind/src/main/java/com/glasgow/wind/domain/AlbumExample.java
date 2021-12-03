@@ -304,73 +304,73 @@ public class AlbumExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNull() {
-            addCriterion("type is null");
+        public Criteria andGenreIsNull() {
+            addCriterion("genre is null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNotNull() {
-            addCriterion("type is not null");
+        public Criteria andGenreIsNotNull() {
+            addCriterion("genre is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(String value) {
-            addCriterion("type =", value, "type");
+        public Criteria andGenreEqualTo(String value) {
+            addCriterion("genre =", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(String value) {
-            addCriterion("type <>", value, "type");
+        public Criteria andGenreNotEqualTo(String value) {
+            addCriterion("genre <>", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(String value) {
-            addCriterion("type >", value, "type");
+        public Criteria andGenreGreaterThan(String value) {
+            addCriterion("genre >", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("type >=", value, "type");
+        public Criteria andGenreGreaterThanOrEqualTo(String value) {
+            addCriterion("genre >=", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(String value) {
-            addCriterion("type <", value, "type");
+        public Criteria andGenreLessThan(String value) {
+            addCriterion("genre <", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(String value) {
-            addCriterion("type <=", value, "type");
+        public Criteria andGenreLessThanOrEqualTo(String value) {
+            addCriterion("genre <=", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLike(String value) {
-            addCriterion("type like", value, "type");
+        public Criteria andGenreLike(String value) {
+            addCriterion("genre like", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotLike(String value) {
-            addCriterion("type not like", value, "type");
+        public Criteria andGenreNotLike(String value) {
+            addCriterion("genre not like", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<String> values) {
-            addCriterion("type in", values, "type");
+        public Criteria andGenreIn(List<String> values) {
+            addCriterion("genre in", values, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<String> values) {
-            addCriterion("type not in", values, "type");
+        public Criteria andGenreNotIn(List<String> values) {
+            addCriterion("genre not in", values, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(String value1, String value2) {
-            addCriterion("type between", value1, value2, "type");
+        public Criteria andGenreBetween(String value1, String value2) {
+            addCriterion("genre between", value1, value2, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(String value1, String value2) {
-            addCriterion("type not between", value1, value2, "type");
+        public Criteria andGenreNotBetween(String value1, String value2) {
+            addCriterion("genre not between", value1, value2, "genre");
             return (Criteria) this;
         }
 
@@ -651,6 +651,66 @@ public class AlbumExample {
 
         public Criteria andCoverUrlNotBetween(String value1, String value2) {
             addCriterion("cover_url not between", value1, value2, "coverUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusIsNull() {
+            addCriterion("album_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusIsNotNull() {
+            addCriterion("album_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusEqualTo(Integer value) {
+            addCriterion("album_status =", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusNotEqualTo(Integer value) {
+            addCriterion("album_status <>", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusGreaterThan(Integer value) {
+            addCriterion("album_status >", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("album_status >=", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusLessThan(Integer value) {
+            addCriterion("album_status <", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("album_status <=", value, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusIn(List<Integer> values) {
+            addCriterion("album_status in", values, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusNotIn(List<Integer> values) {
+            addCriterion("album_status not in", values, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusBetween(Integer value1, Integer value2) {
+            addCriterion("album_status between", value1, value2, "albumStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("album_status not between", value1, value2, "albumStatus");
             return (Criteria) this;
         }
     }

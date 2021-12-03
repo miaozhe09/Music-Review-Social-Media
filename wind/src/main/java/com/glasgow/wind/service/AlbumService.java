@@ -1,10 +1,8 @@
 package com.glasgow.wind.service;
 
 import com.glasgow.wind.dao.AlbumMapper;
-import com.glasgow.wind.dao.UserMapper;
 import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.domain.AlbumExample;
-import com.glasgow.wind.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +20,7 @@ public class AlbumService {
     AlbumMapper albumMapper;
 
     public void add(Album album) {
+        album.setAlbumStatus(0); // 0 to be reviewd; 1 approved; 2 not approved
         albumMapper.insertSelective(album);
     }
 

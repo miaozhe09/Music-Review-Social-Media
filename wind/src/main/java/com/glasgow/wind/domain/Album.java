@@ -7,7 +7,7 @@ public class Album {
 
     private String artist;
 
-    private String type;
+    private String genre;
 
     private String releaseDate;
 
@@ -16,6 +16,8 @@ public class Album {
     private String trackListing;
 
     private String coverUrl;
+
+    private Integer albumStatus;
 
     public Integer getId() {
         return id;
@@ -41,12 +43,12 @@ public class Album {
         this.artist = artist == null ? null : artist.trim();
     }
 
-    public String getType() {
-        return type;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setGenre(String genre) {
+        this.genre = genre == null ? null : genre.trim();
     }
 
     public String getReleaseDate() {
@@ -79,5 +81,13 @@ public class Album {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl == null ? null : coverUrl.trim();
+    }
+
+    public Integer getAlbumStatus() {
+        return albumStatus;
+    }
+
+    public void setAlbumStatus(Integer albumStatus) {
+        this.albumStatus = albumStatus;
     }
 }
