@@ -21,9 +21,9 @@ public class WebController {
         return "/profile";
     }
 
-    @RequestMapping("/addAlbumSuccessfully")
-    public String addAlbumSuccessfully(){
-        return "/addAlbumSuccessfully";
+    @RequestMapping("/albumToBeReviewed")
+    public String albumToBeReviewd(){
+        return "/albumToBeReviewed";
     }
 
 }

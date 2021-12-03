@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Album To Be Reviewed</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        h1 {
+            margin: 0 auto;
+            width:1000px;
+            font-size: 30px;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            margin-left: 12.5%;
+            margin-right:37.5%;
+            margin-bottom: 3%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <ul class="layui-nav layui-bg-black navP" lay-filter="">
+        <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+        <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+        <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+        <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+        <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+
+        <li class="layui-nav-item fr" th:if="${session.username} != null">
+            <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
+                <dd><a th:href="@{/}">Avatar</a></dd>
+                <dd><a th:href="@{/}">Your Reviews</a></dd>
+                <dd><a th:href="@{/auth/logout}">Log out</a></dd>
+            </dl>
+        </li>
+
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/auth/login}">Log in</a></li>
+        <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
+
+    </ul>
+</div>
+
+
+    <div class="box">
+        <h1>Thank you for your submission. We will complete the review within 5 working days.</h1>
+    </div>
+</body>
+</html>

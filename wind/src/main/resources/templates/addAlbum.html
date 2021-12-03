@@ -151,7 +151,7 @@
                 ,done: function(res){
                     //如果上传失败
                     if(res.code != 0){
-                        return layer.msg('上传失败');
+                        return layer.msg('Upload fail');
                     }
                     //上传成功
                     var demoText = $('#demoText');
@@ -185,9 +185,9 @@
                 data: JSON.stringify(obj),//将对象转为json字符串
                 success: function(res) {
                     if (res.code == 0) {
-                        // location.href = "/addAlbumSuccessfully";
+                        location.href = "/albumToBeReviewed";
                     } else {
-                        alert("注册失败！" + res.message);
+                        // add album fail
                     }
                 }
             });
