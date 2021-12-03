@@ -100,9 +100,9 @@
         <div id="test1" lay-filter="rate" >
         </div>
         <br><i class="layui-icon layui-icon-edit"></i>
-        <a class="colorB" th:href="@{/album/1/addComment}"> Write a comment  </a>
+        <a class="colorB" th:href="@{/album/1/addReview}"> Write a comment  </a>
         <br><i class="layui-icon layui-icon-edit"></i>
-        <a class="colorB" th:href="@{/}"> Write a review</a>
+        <a class="colorB" th:href="@{/album/{albumId}/addReview(albumId=${album.id})}"> Write a review</a>
 
     </div>
 
