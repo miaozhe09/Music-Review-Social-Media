@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Audit</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+
+    <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            margin-left: 12.5%;
+            margin-right:17.5%;
+            margin-bottom: 3%;
+        }
+
+        h1 {
+            width:500px;
+            font-size: 40px;
+            color: #009688;
+        }
+
+        .box1 {
+            margin-bottom: 1%;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .btn1{
+
+        }
+
+        .btn2{
+
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/admin/index}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/audit}">Audit</a></li>
+        </ul>
+
+        <div class="box">
+            <h1>Albums to be reviewed</h1>
+        </div>
+
+        <div class="box" th:each="album,albumStat:${albumList}">
+            <div class="fl box1">
+                    <img th:src="@{${album.coverUrl}}" height="150" width="150"  >
+            </div>
+
+            <div class="clear">
+                <span th:text="${album.name}"></span> /
+                <span th:text="${album.artist}"></span> /
+                <span th:text="${album.genre}"></span> /
+                <span th:text="${album.releaseDate}"></span>
+            </div>
+            <br>
+
+            <div>
+                Introduction
+                <br>
+                <span th:text="${album.introduction}"></span>
+            </div>
+            <br>
+
+            <div>
+                Track Listing
+                <br>
+                <span th:text="${album.trackListing}"></span>
+            </div>
+            <br>
+
+            <div>
+                <button class="layui-btn btn1">Approve
+                </button>
+                <button class="layui-btn btn2">Disapprove
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

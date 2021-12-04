@@ -1,4 +1,4 @@
-package com.glasgow.wind.controller;
+package com.glasgow.wind.controller.user;
 
 import com.glasgow.wind.domain.User;
 import com.glasgow.wind.service.UserService;

@@ -9,25 +9,25 @@
     <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
 
     <style>
-        .box {
-            margin-left: 12.5%;
-            margin-right:17.5%;
-            margin-bottom: 3%;
+        .fr {
+            float: right;
         }
 
-        h1 {
-            width:500px;
-            font-size: 40px;
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
         }
 
     </style>
 </head>
 <body>
-
-    <div class="box">
-        <h1>Albums To Be Reviewed</h1>
+    <div>
+    <ul class="layui-nav layui-bg-black navP" lay-filter="">
+        <li class="layui-nav-item"><a th:href="@{/admin/index}">Home</a></li>
+        <li class="layui-nav-item"><a th:href="@{/audit}">Audit</a></li>
+    </ul>
     </div>
-
 
 </body>
 </html>

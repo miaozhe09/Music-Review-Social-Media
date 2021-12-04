@@ -1,4 +1,4 @@
-package com.glasgow.wind.controller;
+package com.glasgow.wind.controller.admin;
 
 import com.glasgow.wind.domain.Admin;
 import com.glasgow.wind.service.AdminService;

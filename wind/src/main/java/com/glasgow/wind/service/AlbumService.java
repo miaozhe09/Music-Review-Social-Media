@@ -42,4 +42,11 @@ public class AlbumService {
         return album;
     }
 
+    public List<Album> getUnauditedAlbums(){
+        AlbumExample example = new AlbumExample();
+        example.createCriteria().andAlbumStatusEqualTo(0);
+
+        return albumMapper.selectByExample(example);
+    }
+
 }
