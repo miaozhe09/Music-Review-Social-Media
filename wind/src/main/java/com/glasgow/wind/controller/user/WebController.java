@@ -39,14 +39,34 @@ public class WebController {
         return "/user/index";
     }
 
-    @RequestMapping("/profile/{username}")
+    /*@RequestMapping("/profile/{username}")
     public String profile(){
         return "/profile";
-    }
+    }*/
 
     @RequestMapping("/albumToBeReviewed")
     public String albumToBeReviewd(){
         return "/user/albumToBeReviewed";
+    }
+
+    @RequestMapping("/newRelease")
+    public String newRelease(){
+        return "/user/newRelease";
+    }
+
+    @RequestMapping("/discover")
+    public String discover(){
+        return "/user/discover";
+    }
+
+    @RequestMapping("/charts")
+    public String charts(){
+        return "/user/charts";
+    }
+
+    @RequestMapping("/review")
+    public String review(){
+        return "/user/review";
     }
 
     public void setAttribute(List<Album> albumList, Model model){

@@ -2,9 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Featured New Releases</title>
+    <title>Search Result</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        .box {
+            margin-left: 12.5%;
+            margin-right:17.5%;
+            margin-bottom: 3%;
+        }
+
+        .box1 {
+            margin-bottom: 1%;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            width:500px;
+            font-size: 40px;
+            color: #009688;
+        }
+
+        h2 {
+            width:500px;
+            font-size: 30px;
+            color: #009688;
+        }
+
+        .colorB {
+            color: darkblue;
+        }
+
+        .colorG {
+            color: #009688;
+        }
+
+    </style>
 </head>
 <body>
     index page
