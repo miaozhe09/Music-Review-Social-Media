@@ -6,6 +6,10 @@ import com.glasgow.wind.domain.AlbumExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,4 +57,25 @@ public class AlbumService {
         return albumMapper.updateByPrimaryKeySelective(album);
     }
 
+    public List<Integer> getAlbumIdsWithinOneMonth(){
+        List<Integer> res = new ArrayList<>();
+
+        AlbumExample example = new AlbumExample();
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.MONTH, -2);
+        Date m = c.getTime();
+        String mon = format.format(m);
+        System.out.println(mon);
+
+        example.createCriteria().andReleaseDateGreaterThan(mon);
+        List<Album> albums = albumMapper.selectByExample(example);
+
+        for (int i = 0; i < albums.size(); i++) {
+            res.add(albums.get(i).getId());
+        }
+
+        return res;
+    }
 }

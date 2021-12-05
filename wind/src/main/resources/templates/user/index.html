@@ -120,13 +120,13 @@
   <div class="layui-carousel carouselM" id="test1">
     <div carousel-item >
       <div>
-        <a th:href="@{/album/1}"><img src="/images/c1.jpg" style="width: 47%; "></a>
-        <a th:href="@{/album/2}"><img src="images/c2.jpg" style="width: 47%;" class="fr"></a>
+        <a th:href="@{/album/{id}(id=${c1.id})}"><img th:src="@{${c1.coverUrl}}" style="width: 47%; "></a>
+        <a th:href="@{/album/{id}(id=${c2.id})}"><img th:src="@{${c2.coverUrl}}" style="width: 47%; " class="fr"></a>
       </div>
 
       <div>
-        <a th:href="@{/album/3}"><img src="/images/c3.jpg" style="width: 47%;"></a>
-        <a th:href="@{/album/4}"><img src="/images/c4.jpg" style="width: 47%;" class="fr"></a>
+        <a th:href="@{/album/{id}(id=${c3.id})}"><img th:src="@{${c3.coverUrl}}" style="width: 47%; "></a>
+        <a th:href="@{/album/{id}(id=${c4.id})}"><img th:src="@{${c4.coverUrl}}" style="width: 47%; " class="fr"></a>
       </div>
     </div>
   </div>
@@ -141,86 +141,81 @@
     <div class="box-bd">
       <ul class="clearFix">
         <li>
-          <a th:href="@{/album/5}"><img src="/images/n1.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n1.id})}"><img th:src="@{${n1.coverUrl}}" ></a>
           <h4>
-            Abbey Road
+            <span th:text="${n1.name}"></span>
           </h4>
           <div class="info">
-            The Beatles
+            <span th:text="${n1.artist}"></span>
           </div>
         </li>
         <li>
-          <a th:href="@{/album/6}"><img th:src="@{/images/n2.jpg}" ></a>
+          <a th:href="@{/album/{id}(id=${n2.id})}"><img th:src="@{${n2.coverUrl}}" ></a>
           <h4>
-            KID A MNESIA
+            <span th:text="${n2.name}"></span>
           </h4>
           <div class="info">
-            Radiohead
+            <span th:text="${n2.artist}"></span>
           </div>
         </li>
         <li>
-          <a th:href="@{/album/7}"><img src="/images/n3.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n3.id})}"><img th:src="@{${n3.coverUrl}}" ></a>
           <h4>
-            Savage
+            <span th:text="${n3.name}"></span>
           </h4>
           <div class="info">
-            aespa
+            <span th:text="${n3.artist}"></span>
           </div>
         </li>
         <li style="margin-right: 0">
-          <a th:href="@{/album/8}"><img src="/images/n4.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n4.id})}"><img th:src="@{${n4.coverUrl}}" ></a>
           <h4>
-            Wild Dreams
+            <span th:text="${n4.name}"></span>
           </h4>
           <div class="info">
-            Westlife
+            <span th:text="${n4.artist}"></span>
           </div>
         </li>
         <li>
-          <a th:href="@{/album/9}"><img src="/images/n5.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n5.id})}"><img th:src="@{${n5.coverUrl}}" ></a>
           <h4>
-            Music of the Spheres
+            <span th:text="${n5.name}"></span>
           </h4>
           <div class="info">
-            Coldplay
+            <span th:text="${n5.artist}"></span>
           </div>
         </li>
         <li>
-          <a th:href="@{/album/10}"><img src="/images/n6.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n6.id})}"><img th:src="@{${n6.coverUrl}}" ></a>
           <h4>
-            SIGN
+            <span th:text="${n6.name}"></span>
           </h4>
           <div class="info">
-            Autechre
+            <span th:text="${n6.artist}"></span>
           </div>
         </li>
         <li>
-          <a th:href="@{/album/11}"><img src="/images/n7.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n7.id})}"><img th:src="@{${n7.coverUrl}}" ></a>
           <h4>
-            Before
+            <span th:text="${n7.name}"></span>
           </h4>
           <div class="info">
-            James Blake
+            <span th:text="${n7.artist}"></span>
           </div>
         </li>
         <li style="margin-right: 0">
-          <a th:href="@{/album/12}"><img src="/images/n8.jpg" ></a>
+          <a th:href="@{/album/{id}(id=${n8.id})}"><img th:src="@{${n8.coverUrl}}" ></a>
           <h4>
-            Apple
+            <span th:text="${n8.name}"></span>
           </h4>
           <div class="info">
-            A. G. Cook
+            <span th:text="${n8.artist}"></span>
           </div>
         </li>
       </ul>
     </div>
   </div>
   <!-- box核心内容区域结束 -->
-
-  <div id="test2" >
-  </div>
-  TODO
-  <span th:text="${session.username}"></span>
 
   <script>
     layui.use('carousel', function(){
@@ -231,18 +226,6 @@
         ,width: '70%' //设置容器宽度
         ,height:'450px'
         ,arrow: 'always' //始终显示箭头
-      });
-    });
-
-    layui.use('rate', function(){
-      var rate = layui.rate;
-
-      //渲染
-      var ins1 = rate.render({
-        elem: '#test2'  //绑定元素
-        ,readonly: true
-        ,half: true
-        ,value: 4.5
       });
     });
   </script>
