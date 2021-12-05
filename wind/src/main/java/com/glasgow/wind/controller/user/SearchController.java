@@ -28,7 +28,7 @@ public class SearchController {
 
     @GetMapping("/all")
     public String searchResult(@RequestParam("keyword")String keyword, Model model){
-        List<Album> albums = albumService.queryByKeyword(keyword);
+        List<Album> albums = albumService.queryApprovedByKeyword(keyword);
         model.addAttribute("albumList", albums);
 
         return "/user/searchResult";

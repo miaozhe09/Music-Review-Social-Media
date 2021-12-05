@@ -24,11 +24,11 @@ public class AlbumService {
         albumMapper.insertSelective(album);
     }
 
-    public List<Album> queryByKeyword(String name){
+    public List<Album> queryApprovedByKeyword(String name){
         AlbumExample example = new AlbumExample();
         AlbumExample.Criteria criteria = example.createCriteria();
 
-        criteria.andNameLike("%" + name + "%");
+        criteria.andNameLike("%" + name + "%").andAlbumStatusEqualTo(1);
 
         // sort TODO
 
