@@ -49,4 +49,8 @@ public class AlbumService {
         return albumMapper.selectByExample(example);
     }
 
+    public int update(Album album) {
+        return albumMapper.updateByPrimaryKeySelective(album);
+    }
+
 }

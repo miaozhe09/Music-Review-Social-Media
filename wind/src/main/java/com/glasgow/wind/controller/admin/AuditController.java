@@ -26,6 +26,7 @@ public class AuditController {
     public String audit(Model model) {
         List<Album> albums = albumService.getUnauditedAlbums();
         model.addAttribute("albumList", albums);
+        model.addAttribute("count", albums.size());
 
         return "/admin/audit";
     }

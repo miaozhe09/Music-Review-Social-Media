@@ -63,6 +63,25 @@ public class AlbumController {
     @PostMapping("/approve")
     @ResponseBody
     public Object approve(@RequestBody Album album){
+        Album album1 = albumService.queryById(album.getId());
+        album1.setAlbumStatus(1);
+
+        if(albumService.update(album1) != 1){
+            return ResponseUtil.fail();
+        }
+
+        return ResponseUtil.ok();
+    }
+
+    @PostMapping("/disapprove")
+    @ResponseBody
+    public Object disapprove(@RequestBody Album album){
+        Album album1 = albumService.queryById(album.getId());
+        album1.setAlbumStatus(2);
+
+        if(albumService.update(album1) != 1){
+            return ResponseUtil.fail();
+        }
 
         return ResponseUtil.ok();
     }
