@@ -96,15 +96,55 @@
             <br>
 
             <div>
-                <button class="layui-btn btn1">Approve
-                </button>
-                <button class="layui-btn btn2">Disapprove
-                </button>
+                <button type="button" class="layui-btn btn1" th:id="${album.id}">Approve</button>
+                <button type="button" class="layui-btn btn2" th:id="${album.id}">Disapprove</button>
             </div>
         </div>
     </div>
 
+    <script>
+        $(".btn1").click(function() {
+            var id = $(this).attr("id");
+            var obj = {};
+            obj["id"] = id;
+            $.ajax({
+                url: "/album/approve",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Success', {icon: 6,time:2000});
+                    } else {
+                        layer.msg('Fail', {icon: 6,time:2000});
+                    }
+                }
+            });
+        });
 
-    
+        $(".btn2").click(function() {
+            var id = $(this).attr("id");
+            var obj = {};
+            obj["id"] = id;
+            $.ajax({
+                url: "/album/disapprove",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Success', {icon: 6,time:2000});
+                    } else {
+                        layer.msg('Fail', {icon: 6,time:2000});
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
 </body>
 </html>

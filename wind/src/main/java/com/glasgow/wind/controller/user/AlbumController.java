@@ -62,7 +62,8 @@ public class AlbumController {
 
     @PostMapping("/approve")
     @ResponseBody
-    public Object approve(@RequestBody int albumId){
+    public Object approve(@RequestBody Album album){
+
         return ResponseUtil.ok();
     }
 }
