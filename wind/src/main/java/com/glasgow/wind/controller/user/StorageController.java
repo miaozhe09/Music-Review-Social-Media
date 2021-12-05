@@ -35,7 +35,7 @@ public class StorageController {
         System.out.println(storagePath+uuid);
 
         Map<Object, Object> data = new HashMap<Object, Object>();
-        data.put("src", storagePath + "/" + uuid);
+        data.put("src", "http://localhost:8080/storage/fetch/" + uuid);
         return ResponseUtil.ok(data);
     }
 
