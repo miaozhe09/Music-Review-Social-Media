@@ -38,4 +38,8 @@ public class UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    public int update(User user){
+        return userMapper.updateByPrimaryKey(user);
+    }
+
 }

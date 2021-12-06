@@ -2,12 +2,15 @@ package com.glasgow.wind.controller.user;
 
 import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.domain.Rating;
+import com.glasgow.wind.domain.User;
 import com.glasgow.wind.service.AlbumService;
 import com.glasgow.wind.service.RatingService;
+import com.glasgow.wind.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -27,6 +30,9 @@ public class WebController {
     @Autowired
     AlbumService albumService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/")
     public String index(Model model){
         List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
@@ -39,17 +45,20 @@ public class WebController {
         return "/user/index";
     }
 
-    /*@RequestMapping("/profile/{username}")
-    public String profile(){
-        return "/profile";
-    }*/
+    @GetMapping("/profile/{id}")
+    public String profile(@PathVariable("id") int id, Model model){
+        User user = userService.queryById(id);
+        model.addAttribute("user",user);
 
-    @RequestMapping("/albumToBeReviewed")
+        return "/user/profile";
+    }
+
+    @GetMapping("/albumToBeReviewed")
     public String albumToBeReviewd(){
         return "/user/albumToBeReviewed";
     }
 
-    @RequestMapping("/newRelease")
+    @GetMapping("/newRelease")
     public String newRelease(Model model){
         List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
         List<Album> albumList = new ArrayList<>();
@@ -61,17 +70,17 @@ public class WebController {
         return "/user/newRelease";
     }
 
-    @RequestMapping("/discover")
+    @GetMapping("/discover")
     public String discover(){
         return "/user/discover";
     }
 
-    @RequestMapping("/charts")
+    @GetMapping("/charts")
     public String charts(){
         return "/user/charts";
     }
 
-    @RequestMapping("/review")
+    @GetMapping("/review")
     public String review(){
         return "/user/review";
     }

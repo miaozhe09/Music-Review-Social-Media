@@ -1,10 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Releases</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        .box {
+            margin-left: 12.5%;
+            margin-right:37.5%;
+            margin-bottom: 3%;
+        }
+
+        .box1 {
+            margin-bottom: 1%;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            width:500px;
+            font-size: 40px;
+        }
+
+        h2 {
+            width:500px;
+            font-size: 30px;
+        }
+
+        .colorB {
+            color: darkblue;
+        }
+
+        .colorG {
+            color: #009688;
+        }
+
+    </style>
 </head>
 <body>
-    hello, profile!
+    <div>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} != null">
+                <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
+                    <dd><a th:href="@{/}">Avatar</a></dd>
+                    <dd><a th:href="@{/}">Your Reviews</a></dd>
+                    <dd><a th:href="@{/user/logout}">Log out</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+            <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
+
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>My avatar</h2>
+    </div>
+
+    <div class="box">
+        <img th:src="@{${user.avatar}}" height="200" width="200" >
+    </div>
+
+    <div class="box">
+        <form class="layui-form" id="form-changeAvatar">
+            <input type="hidden" name="avatar" class="image">
+            <div class="layui-form-item">
+                <label class="layui-form-label ">Change avatar</label>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="test1">Upload</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="button-changeAvatar">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <input type="hidden" th:value="${user.id}" id="userId"/>
+
+    <script>
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: '/storage/create'
+                ,accept:'images'
+                ,size:50000
+                ,before: function(obj){
+
+                    obj.preview(function(index, file, result){
+
+                        $('#demo1').attr('src', result);
+                    });
+                }
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code != 0){
+                        return layer.msg('Upload fail');
+                    }
+                    //上传成功
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #4cae4c;">Upload Success</span>');
+
+                    var fileupload = $(".image");
+                    fileupload.attr("value",res.data.src);
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">Upload Fail!</span> <a class="layui-btn layui-btn-xs demo-reload">Retry</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+        });
+
+        $("#button-changeAvatar").click(function() {
+            var fields = $('#form-changeAvatar').serializeArray();
+            var obj = {};
+            var userId =$("#userId").val();
+
+            $.each(fields, function(index, field) {
+                obj[field.name] = field.value;
+            })
+            $.ajax({
+                url: "/user/update",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Change Success', {icon: 6,time:1000}, function () {
+                            location.href = "/profile/" + userId;
+                        });
+                    } else {
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

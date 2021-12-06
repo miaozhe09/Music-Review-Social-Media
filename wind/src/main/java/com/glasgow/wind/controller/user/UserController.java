@@ -87,4 +87,16 @@ public class UserController {
         session.removeAttribute("avatar");
         return "redirect:/";
     }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public Object update(@RequestBody User user, HttpSession session){
+        int id = (int)session.getAttribute("userId");
+        User user1 = userService.queryById(id);
+        user1.setAvatar(user.getAvatar());
+        userService.update(user1);
+        session.setAttribute("avatar", user.getAvatar());
+
+        return ResponseUtil.ok();
+    }
 }
