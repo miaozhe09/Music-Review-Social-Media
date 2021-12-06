@@ -1,7 +1,9 @@
 package com.glasgow.wind.controller.user;
 
 import com.glasgow.wind.domain.Review;
+import com.glasgow.wind.service.ReviewService;
 import com.glasgow.wind.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
+    @Autowired
+    ReviewService reviewService;
+
     @PostMapping("/create")
     @ResponseBody
     public Object create(@RequestBody Review review){
+        reviewService.add(review);
         return ResponseUtil.ok();
     }
 }
