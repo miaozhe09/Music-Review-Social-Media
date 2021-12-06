@@ -50,7 +50,14 @@ public class WebController {
     }
 
     @RequestMapping("/newRelease")
-    public String newRelease(){
+    public String newRelease(Model model){
+        List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
+        List<Album> albumList = new ArrayList<>();
+        for (int i = 0; i < albumIdList.size(); i++) {
+            albumList.add(albumService.queryById(albumIdList.get(i)));
+        }
+
+        model.addAttribute("albumList", albumList);
         return "/user/newRelease";
     }
 

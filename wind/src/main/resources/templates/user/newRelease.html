@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Search Result</title>
+    <title>New Releases</title>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
 
     <script src="/layui/layui.js"></script>
@@ -40,7 +40,6 @@
         h1 {
             width:500px;
             font-size: 40px;
-            color: #009688;
         }
 
         h2 {
@@ -60,6 +59,47 @@
     </style>
 </head>
 <body>
-    index page
+    <div>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} != null">
+                <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
+                    <dd><a th:href="@{/}">Avatar</a></dd>
+                    <dd><a th:href="@{/}">Your Reviews</a></dd>
+                    <dd><a th:href="@{/user/logout}">Log out</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+            <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
+
+        </ul>
+    </div>
+
+    <div class="box">
+        <h1>New Releases</h1>
+    </div>
+
+    <div class="box" th:each="album,albumStat:${albumList}">
+        <div class="fl box1">
+            <a th:href="@{/album/{id}(id=${album.id})}"><img th:src="@{${album.coverUrl}}" height="150" width="150"  ></a>
+        </div>
+
+        <div class="clear">
+            <span th:text="${album.name}"></span> /
+            <span th:text="${album.artist}"></span> /
+            <span th:text="${album.genre}"></span> /
+            <span th:text="${album.releaseDate}"></span>
+        </div>
+
+    </div>
 </body>
 </html>
