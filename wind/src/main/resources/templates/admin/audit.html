@@ -114,9 +114,11 @@
                 data: JSON.stringify(obj),
                 success: function(res) {
                     if (res.code == 0) {
-                        location.href = "/audit";
+                        layer.msg('Approve Success', {icon: 6,time:1000}, function () {
+                            location.href = "/audit";
+                        });
                     } else {
-                        layer.msg('Fail', {icon: 6,time:2000});
+                        layer.msg('Approve Fail', {icon: 6,time:2000});
                     }
                 }
             });
@@ -134,9 +136,11 @@
                 data: JSON.stringify(obj),
                 success: function(res) {
                     if (res.code == 0) {
-                        location.href = "/audit";
+                        layer.msg('Disapprove Success', {icon: 6,time:1000}, function () {
+                            location.href = "/audit";
+                        });
                     } else {
-                        layer.msg('Fail', {icon: 6,time:2000});
+                        layer.msg('Disapprove Fail', {icon: 6,time:2000});
                     }
                 }
             });

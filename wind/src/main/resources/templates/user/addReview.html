@@ -18,6 +18,22 @@
             padding-right: 15%;
             margin-bottom: 30px;
         }
+
+        h1 {
+            width:1000px;
+            font-size: 40px;
+        }
+
+        .box1 {
+            margin-left: 12.5%;
+            margin-bottom: 3%;
+        }
+
+        .box {
+            margin-left: 12.5%;
+            margin-right:37.5%;
+            margin-bottom: 3%;
+        }
     </style>
 </head>
 <body>
@@ -46,8 +62,63 @@
     </ul>
     </div>
 
-    <div>
-        <span th:text="${album.name}"></span>
+    <div class="box1">
+        <h1 th:text="'Write a review for '+${album.name}"></h1>
     </div>
+
+    <div>
+        <form class="layui-form box" id="form-addReview">
+            <div class="layui-form-item">
+                <textarea name="content"  placeholder="write a review..." class="layui-textarea"></textarea>
+            </div>
+
+            <div class="layui-form-item">
+                <button class="layui-btn" id="button-addReview" lay-filter="addReview" lay-submit="">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <input type="hidden" th:value="${album.id}" id="albumId"/>
+    <input type="hidden" th:value="${session.userId}" id="userId"/>
+
+    <script>
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+            var albumId =$("#albumId").val();
+            var userId =$("#userId").val();
+
+            form.on('submit(addReview)', function () {
+                var fields = $('#form-addReview').serializeArray();
+                var obj = {};
+                $.each(fields, function(index, field) {
+                    obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
+                })
+                obj["albumId"] = albumId;
+                obj["userId"] = userId;
+                $.ajax({
+                    url: "/review/create",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),//将对象转为json字符串
+                    success: function(res) {
+                        if (res.code == 0) {
+                            layer.msg('Review Success', {icon: 6,time:1000}, function () {
+                                location.href = "/album/" + albumId;
+                            });
+                        } else {
+                        }
+                    },
+                    error: function(){
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
+
+
 </body>
 </html>
