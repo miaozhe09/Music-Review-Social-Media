@@ -34,4 +34,8 @@ public class UserService {
         return userMapper.selectByExample(example);
     }
 
+    public User queryById(int id){
+        return userMapper.selectByPrimaryKey(id);
+    }
+
 }

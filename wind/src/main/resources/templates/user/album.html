@@ -100,8 +100,6 @@
         <div id="test1" lay-filter="rate" >
         </div>
         <br><i class="layui-icon layui-icon-edit"></i>
-        <a class="colorB" th:href="@{/album/1/addReview}"> Write a comment  </a>
-        <br><i class="layui-icon layui-icon-edit"></i>
         <a class="colorB" th:href="@{/album/{albumId}/addReview(albumId=${album.id})}"> Write a review</a>
 
     </div>
@@ -120,14 +118,16 @@
     <br>
 
     <div class="box">
-        <h3>Short Comments(TODO)</h3>
+        <h3>User Reviews</h3>
     </div>
-    <br>
 
-    <div class="box">
-        <h3>Music Reviews(TODO)</h3>
+    <div class="box" th:each="reviewVO,reviewVOStat:${reviewVOList}">
+        <span class="colorB" th:text="${reviewVO.username}"></span> &nbsp &nbsp
+        <span style="color: grey" th:text="${reviewVO.updateTime}"></span>
+        <p th:text="${reviewVO.content}"></p>
+        <hr>
     </div>
-    <br>
+
 
     <input type="hidden" th:value="${album.id}" id="albumId"/>
     <input type="hidden" th:value="${session.userId}" id="userId"/>

@@ -2,10 +2,12 @@ package com.glasgow.wind.service;
 
 import com.glasgow.wind.dao.ReviewMapper;
 import com.glasgow.wind.domain.Review;
+import com.glasgow.wind.domain.ReviewExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Zhe Miao Guid: 2598803M
@@ -23,5 +25,12 @@ public class ReviewService {
         review.setUpdateTime(new Date());
         review.setLikeCount(0);
         reviewMapper.insertSelective(review);
+    }
+
+    public List<Review> getAllByAlbumId(int albumId){
+        ReviewExample example = new ReviewExample();
+        example.createCriteria().andAlbumIdEqualTo(albumId);
+
+        return reviewMapper.selectByExample(example);
     }
 }

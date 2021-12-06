@@ -9,13 +9,13 @@ public class Review {
 
     private Integer userId;
 
+    private String content;
+
     private Integer likeCount;
 
     private Date addTime;
 
     private Date updateTime;
-
-    private String content;
 
     public Integer getId() {
         return id;
@@ -41,6 +41,14 @@ public class Review {
         this.userId = userId;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
     public Integer getLikeCount() {
         return likeCount;
     }
@@ -63,13 +71,5 @@ public class Review {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 }
