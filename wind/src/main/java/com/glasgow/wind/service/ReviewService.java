@@ -20,11 +20,12 @@ public class ReviewService {
     @Autowired(required=false)
     ReviewMapper reviewMapper;
 
-    public void add(Review review){
+    public int add(Review review){
         review.setAddTime(new Date());
         review.setUpdateTime(new Date());
         review.setLikeCount(0);
-        reviewMapper.insertSelective(review);
+
+        return reviewMapper.insertSelective(review);
     }
 
     public List<Review> getAllByAlbumId(int albumId){
@@ -32,5 +33,9 @@ public class ReviewService {
         example.createCriteria().andAlbumIdEqualTo(albumId);
 
         return reviewMapper.selectByExample(example);
+    }
+
+    public int deleteById(int id){
+        return reviewMapper.deleteByPrimaryKey(id);
     }
 }

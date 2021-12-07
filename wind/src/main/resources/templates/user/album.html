@@ -44,6 +44,9 @@
             color: darkblue;
         }
 
+        .deleteReview{
+
+        }
     </style>
 </head>
 <body>
@@ -123,7 +126,9 @@
 
     <div class="box" th:each="reviewVO,reviewVOStat:${reviewVOList}">
         <span class="colorB" th:text="${reviewVO.username}"></span> &nbsp &nbsp
-        <span style="color: grey" th:text="${reviewVO.updateTime}"></span>
+        <span style="color: grey" th:text="${reviewVO.updateTime}"></span> &nbsp &nbsp
+        <a th:if="${session.username} == ${reviewVO.username}" th:id="${reviewVO.reviewId}" class="deleteReview">
+            <i class="layui-icon layui-icon-delete"></i></a>
         <p th:text="${reviewVO.content}"></p>
         <hr>
     </div>
@@ -182,7 +187,7 @@
                     data: JSON.stringify(obj),
                     success: function(res) {
                         if (res.code == 0) {
-                            layer.msg('Rate Success', {icon: 6,time:2000});
+                            layer.msg('Rate Success', {icon: 6,time:1000});
                             ins1.config.readonly = true;
                             rate.render(ins1.config);
                         } else {
@@ -194,6 +199,29 @@
                 });
             });
 
+        });
+
+        $(".deleteReview").click(function() {
+            var albumId =$("#albumId").val();
+            var id = $(this).attr("id");
+            var obj = {};
+            obj["id"] = id;
+            $.ajax({
+                url: "/review/delete",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Delete Success', {icon: 6,time:1000}, function () {
+                            location.href = "/album/" + albumId;
+                        });
+                    } else {
+                        layer.msg('Delete Fail', {icon: 5,time:3000});
+                    }
+                }
+            });
         });
     </script>
 </body>

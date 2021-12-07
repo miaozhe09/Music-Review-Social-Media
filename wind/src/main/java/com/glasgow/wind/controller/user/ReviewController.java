@@ -25,7 +25,20 @@ public class ReviewController {
     @PostMapping("/create")
     @ResponseBody
     public Object create(@RequestBody Review review){
-        reviewService.add(review);
+        if(reviewService.add(review) != 1){
+            return ResponseUtil.fail();
+        }
+
+        return ResponseUtil.ok();
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Object delete(@RequestBody Review review){
+        if(reviewService.deleteById(review.getId()) != 1){
+            return ResponseUtil.fail();
+        }
+
         return ResponseUtil.ok();
     }
 }

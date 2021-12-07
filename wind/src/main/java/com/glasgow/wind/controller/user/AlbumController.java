@@ -58,6 +58,7 @@ public class AlbumController {
                 albumReviewVO.setUsername(userService.queryById(review.getUserId()).getUsername());
                 albumReviewVO.setContent(review.getContent());
                 albumReviewVO.setLikeCount(review.getLikeCount());
+                albumReviewVO.setReviewId(review.getId());
                 String format = new SimpleDateFormat("yyyy-MM-dd").format(review.getUpdateTime());
                 albumReviewVO.setUpdateTime(format);
 

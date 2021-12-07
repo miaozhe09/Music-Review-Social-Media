@@ -6,10 +6,19 @@ package com.glasgow.wind.vo;
  * @Version 1.0
  */
 public class albumReviewVO {
+    private int reviewId;
     private String username;
     private String content;
     private Integer likeCount;
     private String updateTime;
+
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
 
     public String getUsername() {
         return username;
