@@ -61,41 +61,42 @@
         <ul class="layui-nav layui-bg-black navP" lay-filter="">
             <li class="layui-nav-item"><a th:href="@{/admin/index}">Home</a></li>
             <li class="layui-nav-item"><a th:href="@{/audit}">Audit</a></li>
+            <li class="layui-nav-item"><a th:href="@{/admin/logout}">Log out</a></li>
         </ul>
+    </div>
 
-        <div class="box">
-            <h1 th:text="${count} + ' Albums to be reviewed'"></h1>
+    <div class="box">
+        <h1 th:text="${count} + ' Albums to be reviewed'"></h1>
+    </div>
+
+    <div class="box" th:each="album,albumStat:${albumList}">
+        <div class="fl box1">
+                <img th:src="@{${album.coverUrl}}" height="150" width="150"  >
         </div>
 
-        <div class="box" th:each="album,albumStat:${albumList}">
-            <div class="fl box1">
-                    <img th:src="@{${album.coverUrl}}" height="150" width="150"  >
-            </div>
+        <div class="clear">
+            <span th:text="${album.name}"></span> /
+            <span th:text="${album.artist}"></span> /
+            <span th:text="${album.genre}"></span> /
+            <span th:text="${album.releaseDate}"></span>
+        </div>
+        <br>
 
-            <div class="clear">
-                <span th:text="${album.name}"></span> /
-                <span th:text="${album.artist}"></span> /
-                <span th:text="${album.genre}"></span> /
-                <span th:text="${album.releaseDate}"></span>
-            </div>
-            <br>
+        <div>
+            <h3 style="color: #009688;">Introduction</h3>
+            <p th:utext="${album.introduction}"></p>
+        </div>
+        <br>
 
-            <div>
-                <h3 style="color: #009688;">Introduction</h3>
-                <p th:utext="${album.introduction}"></p>
-            </div>
-            <br>
+        <div>
+            <h3 style="color: #009688;">Track Listing</h3>
+            <p th:utext="${album.trackListing}"></p>
+        </div>
+        <br>
 
-            <div>
-                <h3 style="color: #009688;">Track Listing</h3>
-                <p th:utext="${album.trackListing}"></p>
-            </div>
-            <br>
-
-            <div>
-                <button type="button" class="layui-btn btn1 layui-btn-normal" th:id="${album.id}">Approve</button>
-                <button type="button" class="layui-btn btn2 layui-btn-danger" th:id="${album.id}">Disapprove</button>
-            </div>
+        <div>
+            <button type="button" class="layui-btn btn1 layui-btn-normal" th:id="${album.id}">Approve</button>
+            <button type="button" class="layui-btn btn2 layui-btn-danger" th:id="${album.id}">Disapprove</button>
         </div>
     </div>
 
@@ -144,8 +145,6 @@
             });
         });
     </script>
-
-
 
 </body>
 </html>

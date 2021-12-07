@@ -50,4 +50,10 @@ public class AdminController {
     public String index() {
         return "/admin/index";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("adminId");
+        return "/admin/login";
+    }
 }

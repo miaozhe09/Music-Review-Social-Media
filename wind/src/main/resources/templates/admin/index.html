@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Log in</title>
+    <title>Home</title>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
 
     <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
@@ -23,10 +23,11 @@
 </head>
 <body>
     <div>
-    <ul class="layui-nav layui-bg-black navP" lay-filter="">
-        <li class="layui-nav-item"><a th:href="@{/admin/index}">Home</a></li>
-        <li class="layui-nav-item"><a th:href="@{/audit}">Audit</a></li>
-    </ul>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/admin/index}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/audit}">Audit</a></li>
+            <li class="layui-nav-item"><a th:href="@{/admin/logout}">Log out</a></li>
+        </ul>
     </div>
 
 </body>
