@@ -41,6 +41,13 @@ public class AlbumController {
     @GetMapping("/{id}")
     public String getAlbumById(@PathVariable("id") int id, Model model){
         Album album = albumService.queryById(id);
+        // System.out.println(album.getTrackListing());
+        String newTrackListing = album.getTrackListing().replaceAll("[\\r]","<br>");
+        String newIntroduction = album.getIntroduction().replaceAll("[\\r]", "<br>");
+        // System.out.println(newTrackListing);
+        album.setTrackListing(newTrackListing);
+        album.setIntroduction(newIntroduction);
+
         if(album != null){
             model.addAttribute("album", album);
 
