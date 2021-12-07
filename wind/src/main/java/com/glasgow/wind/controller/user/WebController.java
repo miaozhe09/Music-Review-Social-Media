@@ -1,17 +1,16 @@
 package com.glasgow.wind.controller.user;
 
 import com.glasgow.wind.domain.Album;
-import com.glasgow.wind.domain.Rating;
 import com.glasgow.wind.domain.User;
 import com.glasgow.wind.service.AlbumService;
 import com.glasgow.wind.service.RatingService;
+import com.glasgow.wind.service.ReviewService;
 import com.glasgow.wind.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,9 @@ public class WebController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ReviewService reviewService;
+
     @GetMapping("/")
     public String index(Model model){
         List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
@@ -51,6 +53,27 @@ public class WebController {
         model.addAttribute("user",user);
 
         return "/user/profile";
+    }
+
+    @GetMapping("/record/{id}")
+    public String record(@PathVariable("id") int id, Model model){
+        List<Integer> albumIdList1 = reviewService.getAlbumIdListByUserId(id);
+        List<Album> albumList1 = new ArrayList<>();
+        for (int i = 0; i < albumIdList1.size(); i++) {
+            albumList1.add(albumService.queryById(albumIdList1.get(i)));
+        }
+        model.addAttribute("albumList1", albumList1);
+        model.addAttribute("count1", albumList1.size());
+
+        List<Integer> albumIdList2 = ratingService.getAlbumIdListByUserId(id);
+        List<Album> albumList2 = new ArrayList<>();
+        for (int i = 0; i < albumIdList2.size(); i++) {
+            albumList2.add(albumService.queryById(albumIdList2.get(i)));
+        }
+        model.addAttribute("albumList2", albumList2);
+        model.addAttribute("count2", albumList2.size());
+
+        return "/user/record";
     }
 
     @GetMapping("/albumToBeReviewed")

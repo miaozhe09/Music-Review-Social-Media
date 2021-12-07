@@ -6,6 +6,7 @@ import com.glasgow.wind.domain.ReviewExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,5 +38,19 @@ public class ReviewService {
 
     public int deleteById(int id){
         return reviewMapper.deleteByPrimaryKey(id);
+    }
+
+    public List<Integer> getAlbumIdListByUserId(int userId){
+        ReviewExample example = new ReviewExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        example.setOrderByClause("add_time desc");
+        List<Review> reviewList = reviewMapper.selectByExample(example);
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < reviewList.size(); i++) {
+            res.add(reviewList.get(i).getAlbumId());
+        }
+
+        return res;
     }
 }

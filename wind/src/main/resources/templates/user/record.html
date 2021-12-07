@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Record</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+
+    <script src="/layui/layui.js"></script>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" charset="utf-8"></script>
+
+    <style>
+        .box {
+            margin-left: 12.5%;
+            margin-right:17.5%;
+            margin-bottom: 3%;
+        }
+
+        .box1 {
+            margin-bottom: 1%;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .navP{
+            padding-left: 10%;
+            padding-right: 15%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            width:800px;
+            font-size: 40px;
+        }
+
+        h2 {
+            width:500px;
+            font-size: 30px;
+            color: #009688;
+        }
+
+        .colorB {
+            color: darkblue;
+        }
+
+        .colorG {
+            color: #009688;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="layui-nav layui-bg-black navP" lay-filter="">
+            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} != null">
+                <a th:if="${session.avatar} != null" th:href="@{/profile/{id}(id=${session.userId})}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a th:href="@{/profile/{id}(id=${session.userId})}">My Profile</a></dd>
+                    <dd><a th:href="@{/record/{id}(id=${session.userId})}">My Record</a></dd>
+                    <dd><a th:href="@{/user/logout}">Log out</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+            <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
+
+        </ul>
+    </div>
+
+    <div class="box">
+        <h1 th:text="'You have reviewd '+${count1}+' albums'"></h1>
+    </div>
+
+    <div class="box" th:each="album,albumStat:${albumList1}">
+        <div class="fl box1">
+            <a th:href="@{/album/{id}(id=${album.id})}"><img th:src="@{${album.coverUrl}}" height="150" width="150"  ></a>
+        </div>
+
+        <div class="clear">
+            <span th:text="${album.name}"></span> /
+            <span th:text="${album.artist}"></span> /
+            <span th:text="${album.genre}"></span> /
+            <span th:text="${album.releaseDate}"></span>
+        </div>
+
+    </div>
+
+    <div class="box">
+        <h1 th:text="'You have rated '+${count2}+' albums'"></h1>
+    </div>
+
+    <div class="box" th:each="album,albumStat:${albumList2}">
+        <div class="fl box1">
+            <a th:href="@{/album/{id}(id=${album.id})}"><img th:src="@{${album.coverUrl}}" height="150" width="150"  ></a>
+        </div>
+
+        <div class="clear">
+            <span th:text="${album.name}"></span> /
+            <span th:text="${album.artist}"></span> /
+            <span th:text="${album.genre}"></span> /
+            <span th:text="${album.releaseDate}"></span>
+        </div>
+
+    </div>
+</body>
+</html>

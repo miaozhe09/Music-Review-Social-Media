@@ -6,6 +6,7 @@
     <result column="album_id" jdbcType="INTEGER" property="albumId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="score" jdbcType="DECIMAL" property="score" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, album_id, user_id, score
+    id, album_id, user_id, score, add_time
   </sql>
   <select id="selectByExample" parameterType="com.glasgow.wind.domain.RatingExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.glasgow.wind.domain.Rating">
     insert into rating (id, album_id, user_id, 
-      score)
+      score, add_time)
     values (#{id,jdbcType=INTEGER}, #{albumId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{score,jdbcType=DECIMAL})
+      #{score,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.glasgow.wind.domain.Rating">
     insert into rating
@@ -119,6 +120,9 @@
       <if test="score != null">
         score,
       </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="score != null">
         #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.score != null">
         score = #{record.score,jdbcType=DECIMAL},
       </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       album_id = #{record.albumId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      score = #{record.score,jdbcType=DECIMAL}
+      score = #{record.score,jdbcType=DECIMAL},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="score != null">
         score = #{score,jdbcType=DECIMAL},
       </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update rating
     set album_id = #{albumId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
-      score = #{score,jdbcType=DECIMAL}
+      score = #{score,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.glasgow.wind.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Rating {
     private Integer id;
@@ -10,6 +11,8 @@ public class Rating {
     private Integer userId;
 
     private BigDecimal score;
+
+    private Date addTime;
 
     public Integer getId() {
         return id;
@@ -41,5 +44,13 @@ public class Rating {
 
     public void setScore(BigDecimal score) {
         this.score = score;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }
