@@ -38,7 +38,7 @@
         }
 
         h1 {
-            width:500px;
+            width:1000px;
             font-size: 40px;
         }
 
@@ -70,9 +70,8 @@
         <li class="layui-nav-item fr" th:if="${session.username} != null">
             <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
-                <dd><a th:href="@{/}">Avatar</a></dd>
-                <dd><a th:href="@{/}">Your Reviews</a></dd>
+                <dd><a th:href="@{/profile/{id}(id=${session.userId})}">My Profile</a></dd>
+                <dd><a th:href="@{/}">My Record</a></dd>
                 <dd><a th:href="@{/user/logout}">Log out</a></dd>
             </dl>
         </li>
@@ -85,11 +84,7 @@
     </div>
 
     <div class="box">
-        <h1 th:text="'Search results for '+${keyword}"></h1>
-    </div>
-
-    <div class="box">
-        <h2>Albums</h2>
+        <h1 th:text="${count} + ' Search results for '+${keyword}"></h1>
     </div>
 
     <div class="box" th:each="album,albumStat:${albumList}">
@@ -107,9 +102,8 @@
     </div>
 
     <div class="box">
-        <span class="colorG" >If the album or artist you're looking for isn't listed, please: </span>
-        <a class="colorB" th:href="@{/album/create}"> Add album</a> ,
-        <a class="colorB" th:href="@{/album/create}"> Add artist</a>
+        <span style="font-size: 18px" >If the album you're looking for isn't listed, you can: </span>
+        <a class="colorB" style="font-size: 18px" th:href="@{/album/create}"> Add album</a>
     </div>
 
 </body>

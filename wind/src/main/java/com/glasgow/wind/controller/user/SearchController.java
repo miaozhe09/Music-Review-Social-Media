@@ -31,6 +31,7 @@ public class SearchController {
         List<Album> albums = albumService.queryApprovedByKeyword(keyword);
         model.addAttribute("albumList", albums);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("count", albums.size());
 
         return "/user/searchResult";
     }

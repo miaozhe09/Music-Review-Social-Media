@@ -64,6 +64,8 @@ public class AlbumController {
 
                 reviewVOList.add(albumReviewVO);
             }
+
+            model.addAttribute("reviewVOListSize", reviewVOList.size());
             model.addAttribute("reviewVOList", reviewVOList);
             return "/user/album";
         }

@@ -59,29 +59,28 @@
 </head>
 <body>
     <div>
-        <ul class="layui-nav layui-bg-black navP" lay-filter="">
-            <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
-            <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
-            <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
-            <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
-            <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
+    <ul class="layui-nav layui-bg-black navP" lay-filter="">
+        <li class="layui-nav-item"><a th:href="@{/}">Home</a></li>
+        <li class="layui-nav-item"><a th:href="@{/newRelease}">New Releases</a></li>
+        <li class="layui-nav-item"><a th:href="@{/discover}">Discover</a></li>
+        <li class="layui-nav-item"><a th:href="@{/charts}">Charts</a></li>
+        <li class="layui-nav-item"><a th:href="@{/review}">Reviews</a></li>
 
-            <li class="layui-nav-item fr" th:if="${session.username} != null">
-                <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
-                <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd><a th:href="@{/profile/{username}(username=${session.username})}">Profile</a></dd>
-                    <dd><a th:href="@{/}">Avatar</a></dd>
-                    <dd><a th:href="@{/}">Your Reviews</a></dd>
-                    <dd><a th:href="@{/user/logout}">Log out</a></dd>
-                </dl>
-            </li>
+        <li class="layui-nav-item fr" th:if="${session.username} != null">
+            <a th:if="${session.avatar} != null" th:href="@{/}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a th:href="@{/profile/{id}(id=${session.userId})}">My Profile</a></dd>
+                <dd><a th:href="@{/}">My Record</a></dd>
+                <dd><a th:href="@{/user/logout}">Log out</a></dd>
+            </dl>
+        </li>
 
-            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
-            <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
-            <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/register}">Sign up</a></li>
+        <li class="layui-nav-item fr" th:if="${session.username} == null"><a th:href="@{/user/login}">Log in</a></li>
+        <li class="layui-nav-item fr"><a th:href="@{/search}">Search <i class="layui-icon layui-icon-search"></i></a> </li>
 
-        </ul>
-    </div>
+    </ul>
+</div>
 
     <div class="box">
         <h2>My avatar</h2>
