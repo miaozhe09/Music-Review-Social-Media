@@ -25,9 +25,16 @@ public class AuditController {
     @GetMapping
     public String audit(Model model) {
         List<Album> albums = albumService.getUnauditedAlbums();
+        for (int i = 0; i < albums.size(); i++) {
+            Album album = albums.get(i);
+            String newTrackListing = album.getTrackListing().replaceAll("[\\r]","<br>");
+            String newIntroduction = album.getIntroduction().replaceAll("[\\r]", "<br>");
+            album.setTrackListing(newTrackListing);
+            album.setIntroduction(newIntroduction);
+        }
+
         model.addAttribute("albumList", albums);
         model.addAttribute("count", albums.size());
-
         return "/admin/audit";
     }
 }
