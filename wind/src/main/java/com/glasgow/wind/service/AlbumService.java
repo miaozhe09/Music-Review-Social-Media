@@ -79,4 +79,11 @@ public class AlbumService {
         return res;
     }
 
+    public List<Album> queryByIdList(List<Integer> idList){
+        AlbumExample example = new AlbumExample();
+        example.createCriteria().andIdIn(idList);
+
+        return albumMapper.selectByExample(example);
+    }
+
 }

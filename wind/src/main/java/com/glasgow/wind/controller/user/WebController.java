@@ -1,5 +1,7 @@
 package com.glasgow.wind.controller.user;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.domain.User;
 import com.glasgow.wind.service.AlbumService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,14 +85,26 @@ public class WebController {
     }
 
     @GetMapping("/newRelease")
-    public String newRelease(Model model){
-        List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
-        List<Album> albumList = new ArrayList<>();
-        for (int i = 0; i < albumIdList.size(); i++) {
-            albumList.add(albumService.queryById(albumIdList.get(i)));
+    public String newRelease(Model model, @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum,
+                             @RequestParam(defaultValue="10",value="pageSize")Integer pageSize){
+        if(pageNum == null){
+            pageNum = 1;
+        }
+        if(pageNum <= 0){
+            pageNum = 1;
+        }
+        if(pageSize == null) {
+            pageSize = 10;
         }
 
+        List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<Album> albumList = albumService.queryByIdList(albumIdList);
+        PageInfo<Album> pageInfo = new PageInfo<Album>(albumList);
+
         model.addAttribute("albumList", albumList);
+        model.addAttribute("pageInfo", pageInfo);
         return "/user/newRelease";
     }
 

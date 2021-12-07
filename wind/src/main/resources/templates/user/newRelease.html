@@ -100,5 +100,28 @@
         </div>
 
     </div>
+
+    <div class="box">
+        <span th:if="${pageInfo.hasPreviousPage}">
+            <a style="font-size: 16px" class="colorB" th:href="'/newRelease?pageNum='+${pageInfo.prePage}">
+                <i class="layui-icon layui-icon-left"></i> Previous &nbsp;&nbsp;
+            </a>
+        </span>
+
+        <span th:each="nav:${pageInfo.navigatepageNums}">
+            <a style="font-size: 16px" class="colorB" th:href="'/newRelease?pageNum='+${nav}"
+               th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+            <span style="font-size: 16px; color: black" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+            &nbsp;
+        </span>
+
+        <span th:if="${pageInfo.hasNextPage}">
+            <a style="font-size: 16px" class="colorB" th:href="'/newRelease?pageNum='+${pageInfo.nextPage}">
+                &nbsp; Next <i class="layui-icon layui-icon-right"></i>
+            </a>
+        </span>
+
+    </div>
+
 </body>
 </html>
