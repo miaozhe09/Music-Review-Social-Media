@@ -71,6 +71,7 @@ public class WebController {
         for (int i = 0; i < messageList.size(); i++) {
             Message message = messageList.get(i);
             MessageVO messageVO = new MessageVO();
+            messageVO.setMessageId(message.getId());
             if(message.getSenderType() == 0){ // 0: admin 1: user
                 messageVO.setUsername("Offical Notification");
             }

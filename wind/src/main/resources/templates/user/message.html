@@ -92,9 +92,38 @@
     <div class="box" th:each="messageVO,messageVOStat:${messageVOList}">
         <span class="colorB" th:text="${messageVO.username}"></span> &nbsp &nbsp
         <span style="color: grey" th:text="${messageVO.addTime}"></span> &nbsp &nbsp
+        <a th:id="${messageVO.messageId}" class="deleteMessage">
+            <i class="layui-icon layui-icon-delete"></i></a>
         <p th:text="${messageVO.content}"></p>
         <hr>
     </div>
+
+    <input type="hidden" th:value="${session.userId}" id="userId"/>
+
+    <script>
+        $(".deleteMessage").click(function() {
+            var userId = $("#userId").val();
+            var id = $(this).attr("id");
+            var obj = {};
+            obj["id"] = id;
+            $.ajax({
+                url: "/message/delete",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(obj),
+                success: function(res) {
+                    if (res.code == 0) {
+                        layer.msg('Delete Success', {icon: 6,time:1000}, function () {
+                            location.href = "/message/" + userId;
+                        });
+                    } else {
+                        layer.msg('Delete Fail', {icon: 5,time:3000});
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

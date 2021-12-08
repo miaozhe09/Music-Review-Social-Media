@@ -159,7 +159,7 @@
         $("#button-changeAvatar").click(function() {
             var fields = $('#form-changeAvatar').serializeArray();
             var obj = {};
-            var userId =$("#userId").val();
+            var userId = $("#userId").val();
 
             $.each(fields, function(index, field) {
                 obj[field.name] = field.value;

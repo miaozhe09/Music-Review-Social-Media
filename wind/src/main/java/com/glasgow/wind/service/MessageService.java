@@ -32,4 +32,8 @@ public class MessageService {
 
         return messageMapper.selectByExample(example);
     }
+
+    public int deleteById(int id){
+        return messageMapper.deleteByPrimaryKey(id);
+    }
 }

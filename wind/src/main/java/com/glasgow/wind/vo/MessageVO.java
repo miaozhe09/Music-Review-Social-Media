@@ -6,9 +6,18 @@ package com.glasgow.wind.vo;
  * @Version 1.0
  */
 public class MessageVO {
+    private int messageId;
     private String username;
     private String addTime;
     private String content;
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
 
     public String getUsername() {
         return username;
