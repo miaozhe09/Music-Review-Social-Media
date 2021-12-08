@@ -17,6 +17,8 @@ public class Album {
 
     private String coverUrl;
 
+    private Integer contributorId;
+
     private Integer albumStatus;
 
     public Integer getId() {
@@ -81,6 +83,14 @@ public class Album {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl == null ? null : coverUrl.trim();
+    }
+
+    public Integer getContributorId() {
+        return contributorId;
+    }
+
+    public void setContributorId(Integer contributorId) {
+        this.contributorId = contributorId;
     }
 
     public Integer getAlbumStatus() {

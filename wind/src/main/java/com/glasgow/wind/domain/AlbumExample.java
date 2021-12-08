@@ -654,6 +654,66 @@ public class AlbumExample {
             return (Criteria) this;
         }
 
+        public Criteria andContributorIdIsNull() {
+            addCriterion("contributor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdIsNotNull() {
+            addCriterion("contributor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdEqualTo(Integer value) {
+            addCriterion("contributor_id =", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotEqualTo(Integer value) {
+            addCriterion("contributor_id <>", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdGreaterThan(Integer value) {
+            addCriterion("contributor_id >", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("contributor_id >=", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdLessThan(Integer value) {
+            addCriterion("contributor_id <", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("contributor_id <=", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdIn(List<Integer> values) {
+            addCriterion("contributor_id in", values, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotIn(List<Integer> values) {
+            addCriterion("contributor_id not in", values, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdBetween(Integer value1, Integer value2) {
+            addCriterion("contributor_id between", value1, value2, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("contributor_id not between", value1, value2, "contributorId");
+            return (Criteria) this;
+        }
+
         public Criteria andAlbumStatusIsNull() {
             addCriterion("album_status is null");
             return (Criteria) this;

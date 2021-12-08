@@ -1,13 +1,12 @@
 package com.glasgow.wind.controller.user;
 
+import com.glasgow.wind.bo.AuditBO;
 import com.glasgow.wind.domain.Album;
+import com.glasgow.wind.domain.Message;
 import com.glasgow.wind.domain.Review;
-import com.glasgow.wind.service.AlbumService;
-import com.glasgow.wind.service.RatingService;
-import com.glasgow.wind.service.ReviewService;
-import com.glasgow.wind.service.UserService;
+import com.glasgow.wind.service.*;
 import com.glasgow.wind.util.ResponseUtil;
-import com.glasgow.wind.vo.albumReviewVO;
+import com.glasgow.wind.vo.AlbumReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +37,9 @@ public class AlbumController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MessageService messageService;
+
     @GetMapping("/{id}")
     public String getAlbumById(@PathVariable("id") int id, Model model){
         Album album = albumService.queryById(id);
@@ -58,10 +60,10 @@ public class AlbumController {
             }
 
             List<Review> reviewList = reviewService.getAllByAlbumId(id);
-            List<albumReviewVO> reviewVOList = new ArrayList<>();
+            List<AlbumReviewVO> reviewVOList = new ArrayList<>();
             for (int i = 0; i < reviewList.size(); i++) {
                 Review review = reviewList.get(i);
-                albumReviewVO albumReviewVO = new albumReviewVO();
+                AlbumReviewVO albumReviewVO = new AlbumReviewVO();
                 albumReviewVO.setUsername(userService.queryById(review.getUserId()).getUsername());
                 albumReviewVO.setContent(review.getContent());
                 albumReviewVO.setLikeCount(review.getLikeCount());
@@ -101,13 +103,23 @@ public class AlbumController {
 
     @PostMapping("/approve")
     @ResponseBody
-    public Object approve(@RequestBody Album album){
-        Album album1 = albumService.queryById(album.getId());
+    public Object approve(@RequestBody AuditBO auditBO){
+        Album album1 = albumService.queryById(auditBO.getId());
         album1.setAlbumStatus(1);
 
         if(albumService.update(album1) != 1){
             return ResponseUtil.fail();
         }
+
+        int contributorId = album1.getContributorId();
+        String albumName = album1.getName();
+        int senderId = auditBO.getAdminId();
+        Message message = new Message();
+        message.setSenderId(senderId); message.setReceiverId(contributorId);
+        message.setSenderType(0); // 0: admin 1: user
+        String content = "The album " + albumName + " you created has been approved.";
+        message.setContent(content);
+        messageService.add(message);
 
         return ResponseUtil.ok();
     }

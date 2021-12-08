@@ -101,11 +101,15 @@
         </div>
     </div>
 
+    <input type="hidden" th:value="${session.adminId}" id="adminId"/>
+
     <script>
         $(".btn1").click(function() {
             var id = $(this).attr("id");
             var obj = {};
             obj["id"] = id;
+            var adminId =$("#adminId").val();
+            obj["adminId"] = adminId;
             $.ajax({
                 url: "/album/approve",
                 type: "POST",

@@ -131,6 +131,8 @@
         </form>
     </div>
 
+    <input type="hidden" th:value="${session.userId}" id="userId"/>
+
     <script>
         layui.use('upload', function(){
             var $ = layui.jquery
@@ -174,6 +176,8 @@
         $("#button-addAlbum").click(function() {
             var fields = $('#form-addAlbum').serializeArray();
             var obj = {};
+            var userId =$("#userId").val();
+            obj["contributorId"] = userId;
             $.each(fields, function(index, field) {
                 obj[field.name] = field.value; //通过变量，将属性值，属性一起放到对象中
             })

@@ -10,6 +10,7 @@
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
     <result column="track_listing" jdbcType="VARCHAR" property="trackListing" />
     <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
+    <result column="contributor_id" jdbcType="INTEGER" property="contributorId" />
     <result column="album_status" jdbcType="INTEGER" property="albumStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, artist, genre, release_date, introduction, track_listing, cover_url, album_status
+    id, name, artist, genre, release_date, introduction, track_listing, cover_url, contributor_id, 
+    album_status
   </sql>
   <select id="selectByExample" parameterType="com.glasgow.wind.domain.AlbumExample" resultMap="BaseResultMap">
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.glasgow.wind.domain.Album">
     insert into album (id, name, artist, 
       genre, release_date, introduction, 
-      track_listing, cover_url, album_status
-      )
+      track_listing, cover_url, contributor_id, 
+      album_status)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{artist,jdbcType=VARCHAR}, 
       #{genre,jdbcType=VARCHAR}, #{releaseDate,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
-      #{trackListing,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{albumStatus,jdbcType=INTEGER}
-      )
+      #{trackListing,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{contributorId,jdbcType=INTEGER}, 
+      #{albumStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.glasgow.wind.domain.Album">
     insert into album
@@ -139,6 +141,9 @@
       </if>
       <if test="coverUrl != null">
         cover_url,
+      </if>
+      <if test="contributorId != null">
+        contributor_id,
       </if>
       <if test="albumStatus != null">
         album_status,
@@ -168,6 +173,9 @@
       </if>
       <if test="coverUrl != null">
         #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contributorId != null">
+        #{contributorId,jdbcType=INTEGER},
       </if>
       <if test="albumStatus != null">
         #{albumStatus,jdbcType=INTEGER},
@@ -207,6 +215,9 @@
       <if test="record.coverUrl != null">
         cover_url = #{record.coverUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.contributorId != null">
+        contributor_id = #{record.contributorId,jdbcType=INTEGER},
+      </if>
       <if test="record.albumStatus != null">
         album_status = #{record.albumStatus,jdbcType=INTEGER},
       </if>
@@ -225,6 +236,7 @@
       introduction = #{record.introduction,jdbcType=VARCHAR},
       track_listing = #{record.trackListing,jdbcType=VARCHAR},
       cover_url = #{record.coverUrl,jdbcType=VARCHAR},
+      contributor_id = #{record.contributorId,jdbcType=INTEGER},
       album_status = #{record.albumStatus,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -254,6 +266,9 @@
       <if test="coverUrl != null">
         cover_url = #{coverUrl,jdbcType=VARCHAR},
       </if>
+      <if test="contributorId != null">
+        contributor_id = #{contributorId,jdbcType=INTEGER},
+      </if>
       <if test="albumStatus != null">
         album_status = #{albumStatus,jdbcType=INTEGER},
       </if>
@@ -269,6 +284,7 @@
       introduction = #{introduction,jdbcType=VARCHAR},
       track_listing = #{trackListing,jdbcType=VARCHAR},
       cover_url = #{coverUrl,jdbcType=VARCHAR},
+      contributor_id = #{contributorId,jdbcType=INTEGER},
       album_status = #{albumStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

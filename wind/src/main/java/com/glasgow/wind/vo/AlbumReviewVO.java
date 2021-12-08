@@ -5,7 +5,7 @@ package com.glasgow.wind.vo;
  * @Date 2021/12/6 15:12
  * @Version 1.0
  */
-public class albumReviewVO {
+public class AlbumReviewVO {
     private int reviewId;
     private String username;
     private String content;
