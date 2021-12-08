@@ -127,13 +127,24 @@ public class AlbumController {
 
     @PostMapping("/disapprove")
     @ResponseBody
-    public Object disapprove(@RequestBody Album album){
-        Album album1 = albumService.queryById(album.getId());
+    public Object disapprove(@RequestBody AuditDTO auditDTO){
+        Album album1 = albumService.queryById(auditDTO.getId());
         album1.setAlbumStatus(2);
 
         if(albumService.update(album1) != 1){
             return ResponseUtil.fail();
         }
+
+        int contributorId = album1.getContributorId();
+        String albumName = album1.getName();
+        int senderId = auditDTO.getAdminId();
+        Message message = new Message();
+        message.setSenderId(senderId);
+        message.setReceiverId(contributorId);
+        message.setSenderType(0); // 0: admin 1: user
+        String content = "The album (" + albumName + ") you created was not approved.";
+        message.setContent(content);
+        messageService.add(message);
 
         return ResponseUtil.ok();
     }

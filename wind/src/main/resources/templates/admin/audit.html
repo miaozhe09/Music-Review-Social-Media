@@ -132,6 +132,8 @@
             var id = $(this).attr("id");
             var obj = {};
             obj["id"] = id;
+            var adminId =$("#adminId").val();
+            obj["adminId"] = adminId;
             $.ajax({
                 url: "/album/disapprove",
                 type: "POST",

@@ -71,6 +71,7 @@
             <a th:if="${session.avatar} != null" th:href="@{/profile/{id}(id=${session.userId})}"><img th:src="@{${session.avatar}}" class="layui-nav-img" th:text="${session.username}"></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a th:href="@{/profile/{id}(id=${session.userId})}">My Profile</a></dd>
+                <dd><a th:href="@{/message/{id}(id=${session.userId})}">My Message</a></dd>
                 <dd><a th:href="@{/record/{id}(id=${session.userId})}">My Record</a></dd>
                 <dd><a th:href="@{/user/logout}">Log out</a></dd>
             </dl>
