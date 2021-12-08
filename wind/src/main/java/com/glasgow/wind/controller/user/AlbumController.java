@@ -1,6 +1,6 @@
 package com.glasgow.wind.controller.user;
 
-import com.glasgow.wind.bo.AuditBO;
+import com.glasgow.wind.dto.AuditDTO;
 import com.glasgow.wind.domain.Album;
 import com.glasgow.wind.domain.Message;
 import com.glasgow.wind.domain.Review;
@@ -103,8 +103,8 @@ public class AlbumController {
 
     @PostMapping("/approve")
     @ResponseBody
-    public Object approve(@RequestBody AuditBO auditBO){
-        Album album1 = albumService.queryById(auditBO.getId());
+    public Object approve(@RequestBody AuditDTO auditDTO){
+        Album album1 = albumService.queryById(auditDTO.getId());
         album1.setAlbumStatus(1);
 
         if(albumService.update(album1) != 1){
@@ -113,11 +113,12 @@ public class AlbumController {
 
         int contributorId = album1.getContributorId();
         String albumName = album1.getName();
-        int senderId = auditBO.getAdminId();
+        int senderId = auditDTO.getAdminId();
         Message message = new Message();
-        message.setSenderId(senderId); message.setReceiverId(contributorId);
+        message.setSenderId(senderId);
+        message.setReceiverId(contributorId);
         message.setSenderType(0); // 0: admin 1: user
-        String content = "The album " + albumName + " you created has been approved.";
+        String content = "The album (" + albumName + ") you created has been approved.";
         message.setContent(content);
         messageService.add(message);
 

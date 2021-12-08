@@ -2,10 +2,12 @@ package com.glasgow.wind.service;
 
 import com.glasgow.wind.dao.MessageMapper;
 import com.glasgow.wind.domain.Message;
+import com.glasgow.wind.domain.MessageExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Zhe Miao Guid: 2598803M
@@ -21,5 +23,13 @@ public class MessageService {
     public void add(Message message){
         message.setAddTime(new Date());
         messageMapper.insertSelective(message);
+    }
+
+    public List<Message> queryByReceiverId(int id){
+        MessageExample example = new MessageExample();
+        example.createCriteria().andReceiverIdEqualTo(id);
+        example.setOrderByClause("add_time desc");
+
+        return messageMapper.selectByExample(example);
     }
 }

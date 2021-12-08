@@ -27,4 +27,8 @@ public class AdminService {
 
         return adminMapper.selectByExample(example);
     }
+
+    public Admin queryById(int id){
+        return adminMapper.selectByPrimaryKey(id);
+    }
 }

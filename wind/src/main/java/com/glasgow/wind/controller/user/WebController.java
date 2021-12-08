@@ -3,11 +3,10 @@ package com.glasgow.wind.controller.user;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.glasgow.wind.domain.Album;
+import com.glasgow.wind.domain.Message;
 import com.glasgow.wind.domain.User;
-import com.glasgow.wind.service.AlbumService;
-import com.glasgow.wind.service.RatingService;
-import com.glasgow.wind.service.ReviewService;
-import com.glasgow.wind.service.UserService;
+import com.glasgow.wind.service.*;
+import com.glasgow.wind.vo.MessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +38,12 @@ public class WebController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    MessageService messageService;
+
+    @Autowired
+    AdminService adminService;
+
     @GetMapping("/")
     public String index(Model model){
         List<Integer> albumIdList = ratingService.queryRecommendAlbumId(albumService.getAlbumIdsWithinOneMonth());
@@ -56,6 +62,27 @@ public class WebController {
         model.addAttribute("user",user);
 
         return "/user/profile";
+    }
+
+    @GetMapping("/message/{id}")
+    public String message(@PathVariable("id") int id, Model model){
+        List<Message> messageList = messageService.queryByReceiverId(id);
+        List<MessageVO> messageVOList = new ArrayList<>();
+        for (int i = 0; i < messageList.size(); i++) {
+            Message message = messageList.get(i);
+            MessageVO messageVO = new MessageVO();
+            if(message.getSenderType() == 0){ // 0: admin 1: user
+                messageVO.setUsername("Offical Notification");
+            }
+            String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getAddTime());
+            messageVO.setAddTime(format);
+            messageVO.setContent(message.getContent());
+            messageVOList.add(messageVO);
+        }
+
+        model.addAttribute("messageVOList", messageVOList);
+
+        return "/user/message";
     }
 
     @GetMapping("/record/{id}")

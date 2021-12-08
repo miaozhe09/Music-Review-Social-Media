@@ -1,11 +1,11 @@
-package com.glasgow.wind.bo;
+package com.glasgow.wind.dto;
 
 /**
  * @Author Zhe Miao Guid: 2598803M
  * @Date 2021/12/8 16:30
  * @Version 1.0
  */
-public class AuditBO {
+public class AuditDTO {
     private int adminId;
     private int id; // album id
 

@@ -32,7 +32,7 @@ public class ReviewService {
     public List<Review> getAllByAlbumId(int albumId){
         ReviewExample example = new ReviewExample();
         example.createCriteria().andAlbumIdEqualTo(albumId);
-        example.setOrderByClause("add_time desc");
+        example.setOrderByClause("update_time desc");
 
         return reviewMapper.selectByExample(example);
     }
@@ -44,7 +44,7 @@ public class ReviewService {
     public List<Integer> getAlbumIdListByUserId(int userId){
         ReviewExample example = new ReviewExample();
         example.createCriteria().andUserIdEqualTo(userId);
-        example.setOrderByClause("add_time desc");
+        example.setOrderByClause("update_time desc");
         List<Review> reviewList = reviewMapper.selectByExample(example);
 
         List<Integer> res = new ArrayList<>();
