@@ -3,6 +3,7 @@ package com.glasgow.wind.config;
 import com.glasgow.wind.interceptor.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -20,6 +21,11 @@ public class MyWebConfigurer implements WebMvcConfigurer {
         // excludePathPatterns("/login", "/register") 表示除了登陆与注册之外，因为登陆注册不需要登陆也可以访问
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/album/create", "/rate/create","/album/*/addReview");
         WebMvcConfigurer.super.addInterceptors(registry);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 
 }
