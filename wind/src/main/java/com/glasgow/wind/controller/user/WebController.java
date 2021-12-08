@@ -82,6 +82,7 @@ public class WebController {
         }
 
         model.addAttribute("messageVOList", messageVOList);
+        model.addAttribute("count", messageVOList.size());
 
         return "/user/message";
     }

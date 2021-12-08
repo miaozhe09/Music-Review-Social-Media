@@ -44,7 +44,7 @@ public class UserController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password); // encryption TODO
-        user.setAvatar("http://localhost:8080/storage/fetch/defaultAvatar.jpg");
+        user.setAvatar("http://localhost:8080/storage/fetch/defaultAvatar.jpeg");
 
         userService.add(user);
 

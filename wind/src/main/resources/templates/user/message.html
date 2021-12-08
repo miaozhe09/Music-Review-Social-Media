@@ -46,7 +46,6 @@
         h2 {
             width:500px;
             font-size: 30px;
-            color: #009688;
         }
 
         .colorB {
@@ -85,8 +84,12 @@
         </ul>
     </div>
 
-    <div class="box">
+    <div  class="box">
         <h1>My Message</h1>
+    </div>
+
+    <div th:if="${count} == 0" class="box">
+        <h2>There are no messages yet.</h2>
     </div>
 
     <div class="box" th:each="messageVO,messageVOStat:${messageVOList}">

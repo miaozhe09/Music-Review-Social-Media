@@ -69,7 +69,7 @@ public class AlbumService {
         String mon = format.format(m);
         System.out.println(mon);
 
-        example.createCriteria().andReleaseDateGreaterThan(mon);
+        example.createCriteria().andReleaseDateGreaterThan(mon).andAlbumStatusEqualTo(1);
         List<Album> albums = albumMapper.selectByExample(example);
 
         for (int i = 0; i < albums.size(); i++) {
