@@ -32,6 +32,7 @@ public class ReviewService {
     public List<Review> getAllByAlbumId(int albumId){
         ReviewExample example = new ReviewExample();
         example.createCriteria().andAlbumIdEqualTo(albumId);
+        example.setOrderByClause("add_time desc");
 
         return reviewMapper.selectByExample(example);
     }
