@@ -34,6 +34,10 @@ public class AlbumService {
 
         criteria.andNameLike("%" + name + "%").andAlbumStatusEqualTo(1);
 
+        AlbumExample.Criteria criteria1 = example.createCriteria();
+        criteria1.andArtistLike("%" + name + "%").andAlbumStatusEqualTo(1);
+
+        example.or(criteria1);
         // sort TODO
 
         // page TODO
