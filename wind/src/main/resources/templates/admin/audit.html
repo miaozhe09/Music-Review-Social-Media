@@ -27,7 +27,7 @@
         }
 
         h1 {
-            width:500px;
+            width:1000px;
             font-size: 40px;
         }
 
@@ -67,7 +67,7 @@
     </div>
 
     <div class="box">
-        <h1 th:text="${count} + ' Albums to be reviewed'"></h1>
+        <h1 th:text="${count} + ' Submissions to be reviewed'"></h1>
     </div>
 
     <div class="box" th:each="album,albumStat:${albumList}">

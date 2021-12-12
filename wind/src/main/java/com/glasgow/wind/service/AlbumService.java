@@ -24,7 +24,6 @@ public class AlbumService {
     AlbumMapper albumMapper;
 
     public void add(Album album) {
-        album.setAlbumStatus(0); // 0 to be reviewd; 1 approved; 2 not approved
         albumMapper.insertSelective(album);
     }
 
@@ -32,10 +31,10 @@ public class AlbumService {
         AlbumExample example = new AlbumExample();
         AlbumExample.Criteria criteria = example.createCriteria();
 
-        criteria.andNameLike("%" + name + "%").andAlbumStatusEqualTo(1);
+        criteria.andNameLike("%" + name + "%");
 
         AlbumExample.Criteria criteria1 = example.createCriteria();
-        criteria1.andArtistLike("%" + name + "%").andAlbumStatusEqualTo(1);
+        criteria1.andArtistLike("%" + name + "%");
 
         example.or(criteria1);
         // sort TODO
@@ -48,13 +47,6 @@ public class AlbumService {
     public Album queryById(Integer id){
         Album album = albumMapper.selectByPrimaryKey(id);
         return album;
-    }
-
-    public List<Album> getUnauditedAlbums(){
-        AlbumExample example = new AlbumExample();
-        example.createCriteria().andAlbumStatusEqualTo(0);
-
-        return albumMapper.selectByExample(example);
     }
 
     public int update(Album album) {
@@ -73,7 +65,7 @@ public class AlbumService {
         String mon = format.format(m);
         System.out.println(mon);
 
-        example.createCriteria().andReleaseDateGreaterThan(mon).andAlbumStatusEqualTo(1);
+        example.createCriteria().andReleaseDateGreaterThan(mon);
         List<Album> albums = albumMapper.selectByExample(example);
 
         for (int i = 0; i < albums.size(); i++) {
@@ -88,6 +80,13 @@ public class AlbumService {
         example.createCriteria().andIdIn(idList);
 
         return albumMapper.selectByExample(example);
+    }
+
+    public int getMaxId(){
+        AlbumExample example = new AlbumExample();
+        example.setOrderByClause("id desc");
+
+        return  albumMapper.selectByExample(example).get(0).getId();
     }
 
 }

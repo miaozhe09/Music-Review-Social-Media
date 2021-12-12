@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.glasgow.wind.dao.AlbumMapper">
-  <resultMap id="BaseResultMap" type="com.glasgow.wind.domain.Album">
+<mapper namespace="com.glasgow.wind.dao.AlbumHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.glasgow.wind.domain.AlbumHistory">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="album_id" jdbcType="INTEGER" property="albumId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="artist" jdbcType="VARCHAR" property="artist" />
     <result column="genre" jdbcType="VARCHAR" property="genre" />
@@ -10,6 +11,9 @@
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
     <result column="track_listing" jdbcType="VARCHAR" property="trackListing" />
     <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
+    <result column="contributor_id" jdbcType="INTEGER" property="contributorId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,15 +74,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, artist, genre, release_date, introduction, track_listing, cover_url
+    id, album_id, name, artist, genre, release_date, introduction, track_listing, cover_url, 
+    contributor_id, status, add_date
   </sql>
-  <select id="selectByExample" parameterType="com.glasgow.wind.domain.AlbumExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.glasgow.wind.domain.AlbumHistoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from album
+    from album_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,32 +94,39 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from album
+    from album_history
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from album
+    delete from album_history
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.glasgow.wind.domain.AlbumExample">
-    delete from album
+  <delete id="deleteByExample" parameterType="com.glasgow.wind.domain.AlbumHistoryExample">
+    delete from album_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.glasgow.wind.domain.Album">
-    insert into album (id, name, artist, 
-      genre, release_date, introduction, 
-      track_listing, cover_url)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{artist,jdbcType=VARCHAR}, 
-      #{genre,jdbcType=VARCHAR}, #{releaseDate,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
-      #{trackListing,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.glasgow.wind.domain.AlbumHistory">
+    insert into album_history (id, album_id, name, 
+      artist, genre, release_date, 
+      introduction, track_listing, cover_url, 
+      contributor_id, status, add_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{albumId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{artist,jdbcType=VARCHAR}, #{genre,jdbcType=VARCHAR}, #{releaseDate,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{trackListing,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, 
+      #{contributorId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{addDate,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.glasgow.wind.domain.Album">
-    insert into album
+  <insert id="insertSelective" parameterType="com.glasgow.wind.domain.AlbumHistory">
+    insert into album_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="albumId != null">
+        album_id,
       </if>
       <if test="name != null">
         name,
@@ -137,10 +149,22 @@
       <if test="coverUrl != null">
         cover_url,
       </if>
+      <if test="contributorId != null">
+        contributor_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="addDate != null">
+        add_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="albumId != null">
+        #{albumId,jdbcType=INTEGER},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -163,19 +187,31 @@
       <if test="coverUrl != null">
         #{coverUrl,jdbcType=VARCHAR},
       </if>
+      <if test="contributorId != null">
+        #{contributorId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null">
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.glasgow.wind.domain.AlbumExample" resultType="java.lang.Long">
-    select count(*) from album
+  <select id="countByExample" parameterType="com.glasgow.wind.domain.AlbumHistoryExample" resultType="java.lang.Long">
+    select count(*) from album_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update album
+    update album_history
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.albumId != null">
+        album_id = #{record.albumId,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
@@ -198,28 +234,44 @@
       <if test="record.coverUrl != null">
         cover_url = #{record.coverUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.contributorId != null">
+        contributor_id = #{record.contributorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.addDate != null">
+        add_date = #{record.addDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update album
+    update album_history
     set id = #{record.id,jdbcType=INTEGER},
+      album_id = #{record.albumId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       artist = #{record.artist,jdbcType=VARCHAR},
       genre = #{record.genre,jdbcType=VARCHAR},
       release_date = #{record.releaseDate,jdbcType=VARCHAR},
       introduction = #{record.introduction,jdbcType=VARCHAR},
       track_listing = #{record.trackListing,jdbcType=VARCHAR},
-      cover_url = #{record.coverUrl,jdbcType=VARCHAR}
+      cover_url = #{record.coverUrl,jdbcType=VARCHAR},
+      contributor_id = #{record.contributorId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      add_date = #{record.addDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.glasgow.wind.domain.Album">
-    update album
+  <update id="updateByPrimaryKeySelective" parameterType="com.glasgow.wind.domain.AlbumHistory">
+    update album_history
     <set>
+      <if test="albumId != null">
+        album_id = #{albumId,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -241,18 +293,31 @@
       <if test="coverUrl != null">
         cover_url = #{coverUrl,jdbcType=VARCHAR},
       </if>
+      <if test="contributorId != null">
+        contributor_id = #{contributorId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null">
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.glasgow.wind.domain.Album">
-    update album
-    set name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.glasgow.wind.domain.AlbumHistory">
+    update album_history
+    set album_id = #{albumId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       artist = #{artist,jdbcType=VARCHAR},
       genre = #{genre,jdbcType=VARCHAR},
       release_date = #{releaseDate,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
       track_listing = #{trackListing,jdbcType=VARCHAR},
-      cover_url = #{coverUrl,jdbcType=VARCHAR}
+      cover_url = #{coverUrl,jdbcType=VARCHAR},
+      contributor_id = #{contributorId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      add_date = #{addDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

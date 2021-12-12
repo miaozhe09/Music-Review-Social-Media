@@ -1,16 +1,17 @@
 package com.glasgow.wind.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class AlbumExample {
+public class AlbumHistoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AlbumExample() {
+    public AlbumHistoryExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -161,6 +162,66 @@ public class AlbumExample {
 
         public Criteria andIdNotBetween(Integer value1, Integer value2) {
             addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdIsNull() {
+            addCriterion("album_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdIsNotNull() {
+            addCriterion("album_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdEqualTo(Integer value) {
+            addCriterion("album_id =", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdNotEqualTo(Integer value) {
+            addCriterion("album_id <>", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdGreaterThan(Integer value) {
+            addCriterion("album_id >", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("album_id >=", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdLessThan(Integer value) {
+            addCriterion("album_id <", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdLessThanOrEqualTo(Integer value) {
+            addCriterion("album_id <=", value, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdIn(List<Integer> values) {
+            addCriterion("album_id in", values, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdNotIn(List<Integer> values) {
+            addCriterion("album_id not in", values, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdBetween(Integer value1, Integer value2) {
+            addCriterion("album_id between", value1, value2, "albumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("album_id not between", value1, value2, "albumId");
             return (Criteria) this;
         }
 
@@ -651,6 +712,186 @@ public class AlbumExample {
 
         public Criteria andCoverUrlNotBetween(String value1, String value2) {
             addCriterion("cover_url not between", value1, value2, "coverUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdIsNull() {
+            addCriterion("contributor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdIsNotNull() {
+            addCriterion("contributor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdEqualTo(Integer value) {
+            addCriterion("contributor_id =", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotEqualTo(Integer value) {
+            addCriterion("contributor_id <>", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdGreaterThan(Integer value) {
+            addCriterion("contributor_id >", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("contributor_id >=", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdLessThan(Integer value) {
+            addCriterion("contributor_id <", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("contributor_id <=", value, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdIn(List<Integer> values) {
+            addCriterion("contributor_id in", values, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotIn(List<Integer> values) {
+            addCriterion("contributor_id not in", values, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdBetween(Integer value1, Integer value2) {
+            addCriterion("contributor_id between", value1, value2, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContributorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("contributor_id not between", value1, value2, "contributorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateIsNull() {
+            addCriterion("add_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateIsNotNull() {
+            addCriterion("add_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateEqualTo(Date value) {
+            addCriterion("add_date =", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateNotEqualTo(Date value) {
+            addCriterion("add_date <>", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateGreaterThan(Date value) {
+            addCriterion("add_date >", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("add_date >=", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateLessThan(Date value) {
+            addCriterion("add_date <", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateLessThanOrEqualTo(Date value) {
+            addCriterion("add_date <=", value, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateIn(List<Date> values) {
+            addCriterion("add_date in", values, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateNotIn(List<Date> values) {
+            addCriterion("add_date not in", values, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateBetween(Date value1, Date value2) {
+            addCriterion("add_date between", value1, value2, "addDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddDateNotBetween(Date value1, Date value2) {
+            addCriterion("add_date not between", value1, value2, "addDate");
             return (Criteria) this;
         }
     }

@@ -1,7 +1,8 @@
 package com.glasgow.wind.controller.user;
 
-import com.glasgow.wind.dto.AuditDTO;
 import com.glasgow.wind.domain.Album;
+import com.glasgow.wind.domain.AlbumHistory;
+import com.glasgow.wind.dto.AuditDTO;
 import com.glasgow.wind.domain.Message;
 import com.glasgow.wind.domain.Review;
 import com.glasgow.wind.service.*;
@@ -10,6 +11,7 @@ import com.glasgow.wind.vo.AlbumReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +41,9 @@ public class AlbumController {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired(required = false)
+    AlbumHistoryService albumHistoryService;
 
     @GetMapping("/{id}")
     public String getAlbumById(@PathVariable("id") int id, Model model){
@@ -104,21 +109,50 @@ public class AlbumController {
     @PostMapping("/approve")
     @ResponseBody
     public Object approve(@RequestBody AuditDTO auditDTO){
-        Album album1 = albumService.queryById(auditDTO.getId());
-        album1.setAlbumStatus(1);
+        AlbumHistory albumHistory = albumHistoryService.queryById(auditDTO.getId());
+        albumHistory.setStatus(1);
 
-        if(albumService.update(album1) != 1){
+        // create album (if first time) ; update album (else)
+        Album album = null; String content = null;
+        if (StringUtils.isEmpty(albumHistory.getAlbumId())){
+            album = new Album();
+            albumHistory.setAlbumId(albumService.getMaxId()+1);
+            album.setId(albumService.getMaxId()+1);
+            album.setName(albumHistory.getName());
+            album.setArtist(albumHistory.getArtist());
+            album.setGenre(albumHistory.getGenre());
+            album.setReleaseDate(albumHistory.getReleaseDate());
+            album.setIntroduction(albumHistory.getIntroduction());
+            album.setTrackListing(albumHistory.getTrackListing());
+            album.setCoverUrl(albumHistory.getCoverUrl());
+            albumService.add(album); // need to judege success, id may be Duplicate TODO
+
+            content = "The album (" + albumHistory.getName() + ") you created has been approved.";
+        }else{
+            album = albumService.queryById(albumHistory.getAlbumId());
+            album.setName(albumHistory.getName());
+            album.setArtist(albumHistory.getArtist());
+            album.setGenre(albumHistory.getGenre());
+            album.setReleaseDate(albumHistory.getReleaseDate());
+            album.setIntroduction(albumHistory.getIntroduction());
+            album.setTrackListing(albumHistory.getTrackListing());
+            album.setCoverUrl(albumHistory.getTrackListing());
+            albumService.update(album);
+
+            content = "The album (" + albumHistory.getName() + ") you modified has been approved.";
+        }
+
+        if(albumHistoryService.update(albumHistory) != 1){
             return ResponseUtil.fail();
         }
 
-        int contributorId = album1.getContributorId();
-        String albumName = album1.getName();
+        int contributorId = albumHistory.getContributorId();
         int senderId = auditDTO.getAdminId();
+        // send message to user
         Message message = new Message();
         message.setSenderId(senderId);
         message.setReceiverId(contributorId);
         message.setSenderType(0); // 0: admin 1: user
-        String content = "The album (" + albumName + ") you created has been approved.";
         message.setContent(content);
         messageService.add(message);
 
@@ -128,21 +162,28 @@ public class AlbumController {
     @PostMapping("/disapprove")
     @ResponseBody
     public Object disapprove(@RequestBody AuditDTO auditDTO){
-        Album album1 = albumService.queryById(auditDTO.getId());
-        album1.setAlbumStatus(2);
+        AlbumHistory albumHistory = albumHistoryService.queryById(auditDTO.getId());
+        albumHistory.setStatus(2);
 
-        if(albumService.update(album1) != 1){
+        // create album (if first time) ; update album (else)
+        Album album = null; String content = null;
+        if (StringUtils.isEmpty(albumHistory.getAlbumId())){
+            content = "The album (" + albumHistory.getName() + ") you created has not been approved.";
+        }else{
+            content = "The album (" + albumHistory.getName() + ") you modified has not been approved.";
+        }
+
+        if(albumHistoryService.update(albumHistory) != 1){
             return ResponseUtil.fail();
         }
 
-        int contributorId = album1.getContributorId();
-        String albumName = album1.getName();
+        int contributorId = albumHistory.getContributorId();
         int senderId = auditDTO.getAdminId();
+        // send message to user
         Message message = new Message();
         message.setSenderId(senderId);
         message.setReceiverId(contributorId);
         message.setSenderType(0); // 0: admin 1: user
-        String content = "The album (" + albumName + ") you created was not approved.";
         message.setContent(content);
         messageService.add(message);
 

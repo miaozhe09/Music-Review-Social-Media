@@ -1,6 +1,7 @@
 package com.glasgow.wind.controller.admin;
 
-import com.glasgow.wind.domain.Album;
+import com.glasgow.wind.domain.AlbumHistory;
+import com.glasgow.wind.service.AlbumHistoryService;
 import com.glasgow.wind.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,19 +23,22 @@ public class AuditController {
     @Autowired
     AlbumService albumService;
 
+    @Autowired
+    AlbumHistoryService albumHistoryService;
+
     @GetMapping
     public String audit(Model model) {
-        List<Album> albums = albumService.getUnauditedAlbums();
-        for (int i = 0; i < albums.size(); i++) {
-            Album album = albums.get(i);
-            String newTrackListing = album.getTrackListing().replaceAll("[\\r]","<br>");
-            String newIntroduction = album.getIntroduction().replaceAll("[\\r]", "<br>");
-            album.setTrackListing(newTrackListing);
-            album.setIntroduction(newIntroduction);
+        List<AlbumHistory> albumHistoryList = albumHistoryService.getUnaudited();
+        for (int i = 0; i < albumHistoryList.size(); i++) {
+            AlbumHistory albumHistory = albumHistoryList.get(i);
+            String newTrackListing = albumHistory.getTrackListing().replaceAll("[\\r]","<br>");
+            String newIntroduction = albumHistory.getIntroduction().replaceAll("[\\r]", "<br>");
+            albumHistory.setTrackListing(newTrackListing);
+            albumHistory.setIntroduction(newIntroduction);
         }
 
-        model.addAttribute("albumList", albums);
-        model.addAttribute("count", albums.size());
+        model.addAttribute("albumList", albumHistoryList);
+        model.addAttribute("count", albumHistoryList.size());
         return "/admin/audit";
     }
 }
